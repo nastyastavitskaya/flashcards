@@ -1,0 +1,19 @@
+@import "bootstrap";
+
+/* header */
+
+header {
+  margin-bottom: 46px;
+  h1 {
+    float: center;
+	margin: 0;
+  }
+  ul {
+	float: right;
+	margin-left: 10px;
+  }
+  ul li {
+	display: inline-block;
+	margin: 0 16px;
+  }
+}
