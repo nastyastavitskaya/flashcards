@@ -1,18 +1,20 @@
 <table>
-	<thead>
-		<h1>Все карточки</h1>
-	 <tr>
-	  <th>Original Text</th>
-	  <th>Translated Text</th>
-	  <th>Review Date</th>
-	</tr>
-</thead>
+  <thead>
+	  <h1>Все карточки</h1>
+	  <tr>
+		  <th>Original Text</th>
+		  <th>Translated Text</th>
+		  <th>Review Date</th>
+	   </tr>
+  </thead>
 	
 	<% @cards.each do |card| %>
-	<tr>
-		<td><%= card.original_text %></td>
-		<td><%= card.translated_text %></td>
-		<td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-	</tr>
-	<% end %>
+	<tbody>
+	  <tr>
+		  <td><%= card.original_text %></td>
+		  <td><%= card.translated_text %></td>
+		  <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
+	  </tr>
+	</tbody>
+<% end %>
 </table>
