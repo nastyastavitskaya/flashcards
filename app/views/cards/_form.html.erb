@@ -1,4 +1,4 @@
-<%= form_for @card do |f| %>
+<%= simple_form_for @card do |f| %>
 
   <% if @card.errors.any? %>
     <div id="error_explanation">
@@ -14,19 +14,10 @@
     </div>
   <% end %>
 
-  <p>
-    <%= f.label :original_text  %><br>
-    <%= f.text_field :original_text  %>
-  </p>
- 
-  <p>
-    <%= f.label :translated_text %><br>
-    <%= f.text_area :translated_text %>
-  </p>
+  <%= f.input :original_text %>
+  <%= f.input :translated_text %>
+  <%= f.input :review_date %>
+  <%= f.button :submit %>
 
- 
-
-    <%= f.submit %>
-  </p>
 <% end %>
 
