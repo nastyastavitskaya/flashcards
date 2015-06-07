@@ -1,8 +1,8 @@
 class Card < ActiveRecord::Base
   validates :original_text, :translated_text, presence: true
   validate :same_texts
-  before_save :add_days, on: :create
-  scope :check_review_date, -> { where("review_date <=?", Date.today) }
+  before_save :set_default_review_date, on: :create
+  
   
   def same_texts
     if original_text.mb_chars.downcase.to_s == translated_text.mb_chars.downcase.to_s
@@ -10,8 +10,8 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def add_days
-    self.review_date = review_date + 3.days
+  def set_default_review_date
+    self.review_date = Time.now + 3.days
   end
 
 end
