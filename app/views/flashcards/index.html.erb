@@ -1,3 +1,22 @@
 <p style="font-size: 22px;">
   Первый в мире удобный менеджер флеш-карточек. Именно так.
 </p>
+
+ 
+<p><% if @card %>
+  <%= @card.original_text %></p>
+  <%= form_tag review_card_path(@card), method: "put" do %>
+    <%= hidden_field_tag :id, value: @card.id %>
+    <td><%= label_tag :label, "Введите перевод:" %></td>
+    <td><%= text_field_tag :user_translated_text %></td>
+    <p><%= submit_tag "Проверить" %></p>
+<% end %>
+
+<p style= "color: red"><%= flash[:alert] %></p>
+<p style= "color: green"><%= flash[:notice] %></p>
+<% end %>
+
+        
+   
+
+
