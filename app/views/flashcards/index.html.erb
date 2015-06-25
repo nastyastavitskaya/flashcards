@@ -1,22 +1,26 @@
-<p style="font-size: 22px;">
+<p class="lead">
   Первый в мире удобный менеджер флеш-карточек. Именно так.
 </p>
 
- 
-<p><% if @card %>
-  <%= @card.original_text %></p>
-  <%= form_tag review_card_path(@card), method: "put" do %>
-    <%= hidden_field_tag :id, value: @card.id %>
-    <td><%= label_tag :label, "Введите перевод:" %></td>
-    <td><%= text_field_tag :user_translated_text %></td>
-    <p><%= submit_tag "Проверить" %></p>
+
+<div>
+  <legend>Карточка для перевода</legend>
+  <% if @card %>
+  <strong><%= @card.original_text %></strong>
+
+  <%= form_for :review, url: review_card_path(@card), method: "PUT", 
+                        html: {class: 'form' } do |f| %>
+    <%= f.hidden_field :id, value: @card.id %></div>
+    <div>
+    <%= f.label :label, "Введите перевод:" %>
+    <%= f.text_field :user_translated_text %>
+    </div>
+
+    <div><%= f.submit "Проверить", class: "btn btn-primary" %></div>
 <% end %>
 
-<p style= "color: red"><%= flash[:alert] %></p>
-<p style= "color: green"><%= flash[:notice] %></p>
+<div>
+<p class="text-error"><%= flash[:alert] %></p>
+<p class="text-success"><%= flash[:notice] %></p>
 <% end %>
-
-        
-   
-
 

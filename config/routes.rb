@@ -2,13 +2,12 @@ Rails.application.routes.draw do
   
   root 'flashcards#index'
   
-   resources :cards do
+  resources :cards do
     member do
       put "review"
     end
   end
   
-    
   # Example resource route with options:
   #   resources :products do
   #     member do

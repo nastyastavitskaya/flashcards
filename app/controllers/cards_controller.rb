@@ -42,20 +42,24 @@ class CardsController < ApplicationController
   end
 
   def review
-    if @card.check_translation(params[:user_translated_text])
-      flash[:notice] = "Правильно!"
-      @card.update_review_date
-    else
-      flash[:alert] = "Не правильно!"
-    end
-    redirect_to root_path
+    @card = Card.find(review_params[:id])
+      if @card.check_translation(review_params[:user_translated_text])
+        flash[:notice] = "Правильно!"
+         @card.update_review_date
+      else
+        flash[:alert] = "Не правильно!"
+      end
+        redirect_to root_path
   end
 
-
-
   private
-    def card_params
-      params.require(:card).permit(:original_text, :translated_text, :review_date, :user_translated_text)
+  
+  def card_params
+    params.require(:card).permit(:original_text, :translated_text, :review_date)
+  end
+
+  def review_params
+    params.require(:review).permit(:id, :user_translated_text)
   end
 
 
