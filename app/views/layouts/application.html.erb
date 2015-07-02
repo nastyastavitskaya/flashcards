@@ -2,15 +2,18 @@
 <html>
 <head>
   <title>Флэшкарточкер</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-	<body>
-	<%= render 'layouts/header' %>
-	<section id="container"> </section>
+  <body>
+  <%= render 'layouts/header' %>
+  <section id="container"> </section>
 
-	<%= yield %>
+  <%= yield %>
+  
+  <p class="text-error"><%= flash[:alert] %></p>
+  <p class="text-success"><%= flash[:notice] %></p>
 
-	</body>
+  </body>
 </html>

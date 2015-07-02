@@ -1,9 +1,7 @@
 class ReviewsController < ApplicationController
-
   def create
     @card = Card.find(review_params[:id]) 
-    
-     if @card.check_translation(review_params[:user_translated_text])
+      if @card.check_translation(review_params[:user_translated_text])
         flash[:notice] = "Правильно!"
         @card.update_review_date
       else
@@ -12,7 +10,7 @@ class ReviewsController < ApplicationController
     redirect_to root_path
   end
 
- def review_params
+  def review_params
     params.require(:review).permit(:id, :user_translated_text)
   end
 end

@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root 'flashcards#index'
   
   resources :cards 
-
-  post "review" => "reviews#create"
+  resources :reviews
+  
  
   
   # Example resource route with options:

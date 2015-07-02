@@ -1,6 +1,6 @@
 class FlashcardsController < ApplicationController
   
  def index
-   @card = Card.review_time.first
+   @card = Card.to_review.first
   end
 end
