@@ -8,7 +8,7 @@
   <% if @card %>
   <strong><%= @card.original_text %></strong>
 
-  <%= form_for :review, url: review_card_path(@card), method: "PUT", 
+  <%= form_for :review, url: review_path, 
                         html: {class: 'form' } do |f| %>
     <%= f.hidden_field :id, value: @card.id %></div>
     <div>

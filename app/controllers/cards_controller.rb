@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   before_action :find_card, 
-                only: [:show, :edit, :update, :destroy, :review]
+                only: [:show, :edit, :update, :destroy]
   
   def index
     @cards = Card.all
@@ -41,25 +41,10 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
-  def review
-    @card = Card.find(review_params[:id])
-      if @card.check_translation(review_params[:user_translated_text])
-        flash[:notice] = "Правильно!"
-         @card.update_review_date
-      else
-        flash[:alert] = "Не правильно!"
-      end
-        redirect_to root_path
-  end
-
   private
   
   def card_params
     params.require(:card).permit(:original_text, :translated_text, :review_date)
-  end
-
-  def review_params
-    params.require(:review).permit(:id, :user_translated_text)
   end
 
 
