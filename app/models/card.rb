@@ -14,18 +14,19 @@ class Card < ActiveRecord::Base
   def set_default_review_date
     self.review_date = Time.now + 3.days
   end
-  
-  
-  def check_translation(user_translated_text)
-    if translated_text.downcase == user_translated_text.downcase
-      def update_review_date
-        update_attribute(:review_date, self.review_date + 3.days)
-      end
-    end
-  end
 
+  def check_translation(user_translated_text)
+    translated_text.mb_chars.downcase.to_s == user_translated_text.mb_chars.downcase.to_s
+
+  end
+  
+  def update_review_date
+    update_attribute(:review_date, self.review_date + 3.days)
+  end
+  
+  
   def downcase
-    text.mb_chars.downcase.to_s 
+    String.mb_chars.downcase
   end
 end
 
