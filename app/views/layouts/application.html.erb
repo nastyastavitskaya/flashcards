@@ -8,10 +8,10 @@
 </head>
   <body>
   <%= render 'layouts/header' %>
-  <section id="container"> </section>
+
 
   <%= yield %>
-  
+
   <p class="text-error"><%= flash[:alert] %></p>
   <p class="text-success"><%= flash[:notice] %></p>
 

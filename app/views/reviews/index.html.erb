@@ -1,0 +1,18 @@
+<div>
+  <legend>Карточка для перевода</legend>
+  <% if @card %>
+    <strong><%= @card.original_text %></strong>
+    <%= form_for :review, url: reviews_path,
+                        html: {class: 'form' } do |f| %>
+    <%= f.hidden_field :id, value: @card.id %>
+</div>
+<div>
+  <%= f.label :label, "Введите перевод:" %>
+  <%= f.text_field :user_translated_text %>
+</div>
+
+<div>
+  <%= f.submit "Проверить", class: "btn btn-primary" %>
+</div>
+<% end %>
+<% end %>

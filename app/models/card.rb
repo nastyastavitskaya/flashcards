@@ -17,7 +17,7 @@ class Card < ActiveRecord::Base
 
   def check_translation(user_translated_text)
     if sanitize_word(translated_text) == sanitize_word(user_translated_text)
-    update_review_date
+      update_review_date
     end
   end
 
