@@ -1,0 +1,31 @@
+@import "bootstrap";
+ 
+header {
+  margin-bottom: 46px;
+  h1 {
+    float: center;
+    margin: 0;
+  }
+  ul {
+    float: right;
+    margin-left: 10px;
+    li {
+      display: inline-block;
+      margin: 0 16px;
+    }
+  }
+}
+
+.container {
+  margin: 48px auto;
+  width: 960px;
+}
+
+.container > section {
+  clear: both;
+}
+
+
+/* MISC */
+
+.clearfix:after {content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;} html[xmlns].clearfix{display:block;} * html .clearfix{height:1%;}

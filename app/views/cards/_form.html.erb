@@ -1,5 +1,4 @@
-<%= simple_form_for (@card) do |f| %>
-
+<%= simple_form_for card do |f| %>
   <% if @card.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -18,6 +17,6 @@
   <%= f.input :translated_text %>
   <%= f.input :review_date %>
   <%= f.button :submit %>
-
 <% end %>
+
 
