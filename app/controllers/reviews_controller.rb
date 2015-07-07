@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
     else
       flash[:alert] = "Не правильно!"
     end
-    redirect_to root_path
+    redirect_to reviews_path
   end
 
   def review_params
