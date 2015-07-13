@@ -24,8 +24,4 @@ ActiveRecord::Schema.define(version: 20150603131716) do
     t.datetime "updated_at"
   end
 
-  create_table "unicorns", id: false, force: :cascade do |t|
-    t.boolean "happy"
-  end
-
 end
