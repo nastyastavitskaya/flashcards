@@ -5,11 +5,7 @@ class Card < ActiveRecord::Base
   scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
 
-  def same_texts
-    if sanitize_word(original_text) == sanitize_word(translated_text)
-      errors.add(:original_text, "and #{:translated_text} can't be same!")
-    end
-  end
+
 
   def set_default_review_date
     self.review_date = Time.now + 3.days
@@ -27,6 +23,13 @@ class Card < ActiveRecord::Base
 
 
   private
+
+  def same_texts
+    if sanitize_word(original_text) == sanitize_word(translated_text)
+      errors.add(:original_text, "and #{:translated_text} can't be same!")
+    end
+  end
+
   def sanitize_word(string)
     string.mb_chars.downcase
   end
