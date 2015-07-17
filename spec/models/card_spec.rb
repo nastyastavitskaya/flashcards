@@ -17,11 +17,13 @@ describe Card do
     it "wrong translation" do
       expect(card.check_translation("DOGgg")).to be_falsey
     end
+    it "update review date correct" do
+      expect(card.review_date).to eq(Date.today + 3.day)
+    end
   end
 
   context "#set_default_review_date" do
     it "set review date correct" do
-      card.set_default_review_date
       expect(card.review_date).to eq(Date.today + 3.day)
     end
   end
