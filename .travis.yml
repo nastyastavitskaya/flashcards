@@ -1,2 +1,10 @@
 language: ruby
-sudo: required
+sudo: false
+rvm:
+  - 2.0.0
+  - 2.1.1
+  - 2.2.2
+env:
+  - DB=postgresql
+script:
+  - bundle exec rspec spec
