@@ -1,12 +1,12 @@
 language: ruby
-sudo: false
+sudo: required
 rvm:
   - 2.0.0
   - 2.1.1
   - 2.2.2
-env:
-  - DB=postgresql
-before_script:
-  - psql -c 'create database card_test_db;' -U postgres
+
 script:
   - bundle exec rspec spec
+before_script:
+  - cp config/database.yml.example config/database.yml
+  - psql -c 'create database card_test_db' -U postgres
