@@ -9,5 +9,5 @@ rvm:
 script:
   - bundle exec rspec spec
 before_script:
-  - cp config/database.travis.yml config/database.yml
-  - psql -c 'create database strano_db;' -U postgres
+
+  - psql -c 'create database card_test_db;' -U postgres
