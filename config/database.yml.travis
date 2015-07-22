@@ -2,7 +2,7 @@ postgresql: &postgresql
   adapter: postgresql
   username: postgres
   password:
-  database: card_test_db_<%= Rails.env %>
+  database: card_db_<%= Rails.env %>
   min_messages: ERROR
 
 defaults: &defaults
