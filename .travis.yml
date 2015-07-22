@@ -4,10 +4,12 @@ rvm:
   - 2.0.0
   - 2.1.1
   - 2.2.2
-  env:
-  - DB=postgresql
 script:
   - bundle exec rspec spec
+postgres:
+  adapter: postgresql
+  database: myapp_test
+  username: postgres
 before_script:
-
-  - psql -c 'create database card_test_db;' -U postgres
+  - "psql -c 'create database myapp_test;' -U postgres"
+  - "rake db:migrate"
