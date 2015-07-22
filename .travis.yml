@@ -4,8 +4,10 @@ rvm:
   - 2.0.0
   - 2.1.1
   - 2.2.2
+  env:
+  - DB=postgresql
 script:
   - bundle exec rspec spec
 before_script:
-  - psql -c 'create database card_test_db;' -U postgres
-  - cp config/database.yml.travis config/database.yml
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database strano_db;' -U postgres
