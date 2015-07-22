@@ -1,7 +1,9 @@
 language: ruby
-sudo: required
 rvm:
   - 2.1.1
+  env:
+
+  - DB=postgresql
 script:
   - bundle exec rspec spec
 postgres:
@@ -9,5 +11,5 @@ postgres:
   database: myapp_test
   username: postgres
 before_script:
-  - "psql -c 'create database myapp_test;' -U postgres"
-  - "rake db:migrate"
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database strano_test' -U postgres
