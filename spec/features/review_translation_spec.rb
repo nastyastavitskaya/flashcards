@@ -1,15 +1,16 @@
 require 'rails_helper'
 
-feature "User card translation" do
-  let(:card) { FactoryGirl.create(:card) }
+feature "User card to review" do
+  let(:card) { create(:card) }
   before(:each) do
     visit root_path
     click_link "Перейти к тренировщику"
+    visit reviews_path
   end
 
 
-  scenario "with correct input" do
-    visit reviews_path
+ context "new cards to review" do
+  it "input right translation" do
     if has_field?("user_translated_text")
       fill_in "user_translated_text", with: "dog"
       click_button "Проверить"
@@ -17,22 +18,19 @@ feature "User card translation" do
     end
   end
 
-  scenario "with incorrect input" do
-    visit reviews_path
+  it "input wrong translation" do
     if has_field?("user_translated_text")
       fill_in "user_translated_text", with: "doggg"
       click_button "Проверить"
       expect(page).to have_content "Не правильно!"
     end
   end
+ end
 
-  scenario "with no input" do
-    visit reviews_path
-    if has_field?("user_translated_text")
-      fill_in "user_translated_text", with: ""
-      click_button "Проверить"
-      expect(page).to redirect_to reviews_path
-    end
+ context "no cards to review" do
+  it "displays no cards" do
+    expect(page).to have_content("Новых карточек для проверки нет!")
   end
+end
 
 end
