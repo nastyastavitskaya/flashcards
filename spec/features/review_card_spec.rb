@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Cards to review" do
-
   context "no cards to review" do
     before(:each) do
     visit root_path
