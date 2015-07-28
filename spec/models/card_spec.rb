@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Card do
-  let!(:card){ FactoryGirl.create(:card) }
+  let!(:card){ create(:card) }
 
   context "#same_texts" do
     it "fill in translated text correct" do
@@ -34,4 +34,5 @@ describe Card do
       expect(card.review_date).to eq(Date.today + 3.day)
     end
   end
+
 end
