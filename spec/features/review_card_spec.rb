@@ -3,10 +3,11 @@ require 'rails_helper'
 describe "Cards to review" do
   context "no cards to review" do
     before(:each) do
-    visit root_path
-    click_link "Перейти к тренировщику"
-    visit reviews_path
-  end
+      visit root_path
+      click_link "Перейти к тренировщику"
+      visit reviews_path
+    end
+
     it "no new cards to review" do
       expect(page).to have_content "Новых карточек для проверки нет"
      end

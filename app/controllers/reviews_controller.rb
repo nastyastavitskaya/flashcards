@@ -17,7 +17,3 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:card_id, :user_translated_text)
   end
 end
-
-
-
-
