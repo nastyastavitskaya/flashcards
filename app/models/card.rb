@@ -4,9 +4,6 @@ class Card < ActiveRecord::Base
   before_save :set_default_review_date, on: :create
   scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
-
-
-
   def set_default_review_date
     self.review_date = Time.now + 3.days
   end
