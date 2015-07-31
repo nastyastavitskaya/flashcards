@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150731125300) do
     t.text     "original_text"
     t.text     "translated_text"
     t.date     "review_date"
-    t.integer  "user_id"
+    t.integer  "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

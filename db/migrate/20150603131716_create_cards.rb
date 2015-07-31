@@ -4,6 +4,7 @@ class CreateCards < ActiveRecord::Migration
       t.references :user, index: true
       t.text :original_text, :translated_text
       t.date :review_date
+      t.integer :user_id, null: false
 
       t.timestamps
     end
