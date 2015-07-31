@@ -37,4 +37,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'timecop'
+  gem 'shoulda-matchers'
 end
