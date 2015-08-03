@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
-  before_action :find_card,
+  before_action :find_card, 
                 only: [:show, :edit, :update, :destroy]
-
+  
   def index
     @cards = Card.all
   end
@@ -10,7 +10,7 @@ class CardsController < ApplicationController
   def show
   end
 
-
+  
   def new
     @card = Card.new
   end
@@ -20,7 +20,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
-
+    
     if @card.save
       redirect_to @card
     else
@@ -42,7 +42,7 @@ class CardsController < ApplicationController
   end
 
   private
-
+  
   def card_params
     params.require(:card).permit(:original_text, :translated_text, :review_date)
   end
