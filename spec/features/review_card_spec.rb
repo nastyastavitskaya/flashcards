@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "Cards to review" do
   context "no cards to review" do
     before(:each) do
+      user = create(:user)
       card = create(:card)
       Timecop.freeze(Date.today - 5.days)
       visit root_path

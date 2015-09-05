@@ -1,0 +1,27 @@
+<h1>Log In</h1>
+
+<%= form_tag sessions_path, method: :post do %>
+  <div class="form-group">
+    <%= label_tag :email %>
+    <%= email_field_tag :email, nil, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :password %>
+    <%= password_field_tag :password, nil, class: 'form-control', required: true %>
+  </div>
+
+  <p><%= submit_tag 'Log in', class: 'btn btn-primary btn-lg' %></p>
+
+  <p><%= link_to auth_at_provider_path(:provider => :facebook) do %>
+    <button class="btn btn-facebook">
+    <i class="fa fa-facebook"></i> | Log in with Facebook</button>
+  <% end %>
+  <%= link_to auth_at_provider_path(:provider => :twitter) do %>
+    <button class="btn btn-twitter">
+    <i class="fa fa-twitter"></i> | Log in with Twitter</button></p>
+  <% end %>
+<% end %>
+
+<p>New user? <%= link_to "Sign up now!", sign_up_path %></p>
+
