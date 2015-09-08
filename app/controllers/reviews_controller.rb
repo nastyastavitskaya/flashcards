@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+
   def index
     @card = Card.to_review.first
   end
@@ -16,4 +17,5 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:card_id, :user_translated_text)
   end
+
 end
