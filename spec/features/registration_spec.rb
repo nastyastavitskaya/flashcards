@@ -5,10 +5,10 @@ describe "Registration" do
         visit root_path
         visit log_in_path
         click_link "Sign up now"
+        visit sign_up_path
     end
 
   it "as a new member" do
-    visit sign_up_path
     fill_in "Name", with: "new member"
     fill_in "Email", with: "newmember@gmail.com"
     fill_in "Password", with: "blabla"
@@ -18,7 +18,6 @@ describe "Registration" do
   end
 
   it "with errors" do
-    visit sign_up_path
     fill_in "Name", with: "new member"
     fill_in "Email", with: "newmember@gmail.com"
     fill_in "Password", with: " "
