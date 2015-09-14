@@ -25,5 +25,4 @@ describe "Registration" do
     click_button "Register"
     expect(page).to have_css(".alert")
   end
-
 end

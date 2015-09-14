@@ -12,7 +12,7 @@ describe "Log in" do
     fill_in "Password", with: "k"
     click_button "Log in"
     expect(page).to have_css(".alert-danger")
-    expect(page).to have_content("Email or password was invalid.")
+    expect(page).to have_content("Email and/or password is invalid.")
   end
 
   it "as a member" do

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  authenticates_with_sorcery!
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end
@@ -8,10 +9,10 @@ class User < ActiveRecord::Base
 
   has_many :cards
 
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { in: 3..30 }
 
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes["password"] }
-  validates :password, confirmation: true, if: -> { new_record? || changes["password"] }
+  validates :password, confirmation: true
   validates :password_confirmation, presence: true, if: -> { new_record? || changes["password"] }
 
   validates :email, uniqueness: true,

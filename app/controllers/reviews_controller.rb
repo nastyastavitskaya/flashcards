@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+   before_action :require_login
 
   def index
     @card = Card.to_review.first
@@ -18,4 +19,10 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:card_id, :user_translated_text)
   end
 
+  private
+
+  def not_authenticated
+    flash[:danger] = "Please log in first!"
+    redirect_to log_in_path
+  end
 end

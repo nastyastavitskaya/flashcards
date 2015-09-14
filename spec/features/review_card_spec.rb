@@ -5,6 +5,10 @@ describe "Cards to review" do
     before(:each) do
       user = create(:user)
       card = create(:card)
+      visit log_in_path
+      fill_in "Email", with: "steve@apple.com"
+      fill_in "Password", with: "applebeforeapple"
+      click_button "Log in"
       Timecop.freeze(Date.today - 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
@@ -19,7 +23,12 @@ describe "Cards to review" do
 
   context "new cards to review" do
     before(:each) do
+      user = create(:user)
       card = create(:card)
+      visit log_in_path
+      fill_in "Email", with: "steve@apple.com"
+      fill_in "Password", with: "applebeforeapple"
+      click_button "Log in"
       Timecop.freeze(Date.today + 5.days)
       visit root_path
       click_link "Перейти к тренировщику"

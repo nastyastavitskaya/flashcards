@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'oauths/oauth'
-
-  get 'oauths/callback'
-
-  # get 'oauths/oauth'
-
-  # get 'oauths/callback', to: "oauth/callback"
 
   root 'flashcards#index'
 
@@ -14,7 +7,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :users
     get '/sign_up', to: 'users#new', as: :sign_up
-    resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
     get '/log_in', to: 'sessions#new', as: :log_in
     delete '/log_out', to: 'sessions#destroy', as: :log_out
 

@@ -5,11 +5,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if login(params[:email], params[:password])
+    user = login(params[:email], params[:password], params[:remember_me])
+    if user
       flash[:success] = "Welcome back!"
       redirect_back_or_to root_path
     else
-      flash.now[:danger] = "Email or password was invalid."
+      flash.now[:danger] = "Email and/or password is invalid."
       render "new"
     end
   end
