@@ -19,7 +19,7 @@ gem 'sorcery'
 gem 'validates_email_format_of'
 gem 'bcrypt'
 gem 'jquery-rails'
-
+gem 'figaro'
 
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'

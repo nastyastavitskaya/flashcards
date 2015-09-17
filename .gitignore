@@ -4,7 +4,6 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 config/database.yml
-config/initializers/sorcery.rb
 # Ignore bundler config.
 /.bundle
 
@@ -16,3 +15,6 @@ config/initializers/sorcery.rb
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore application configuration
+/config/application.yml
