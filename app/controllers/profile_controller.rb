@@ -1,11 +1,10 @@
 class ProfileController < ApplicationController
+  before_action :correct_user
 
   def edit
-    @user = User.find(current_user[:id])
   end
 
   def update
-    @user = User.find(current_user[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to root_path
@@ -19,5 +18,9 @@ class ProfileController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def correct_user
+     @user = User.find(current_user[:id])
   end
 end
