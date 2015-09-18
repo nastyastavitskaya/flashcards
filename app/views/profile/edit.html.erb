@@ -1,8 +1,8 @@
-<h1>Registration</h1>
+<h1>Update your profile</h1>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
+    <%= form_for (@user) do |f| %>
     <%= render 'shared/error_messages' %>
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -16,7 +16,8 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
-      <p><%= f.submit "Register", class: "btn" %></p>
-    <% end %>
+      <p><%= f.submit "Save changes", class: "btn" %></p>
+      <% end %>
   </div>
 </div>
+<%= render 'shared/footer' %>

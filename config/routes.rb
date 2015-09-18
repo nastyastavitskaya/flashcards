@@ -5,8 +5,12 @@ Rails.application.routes.draw do
 
   resources :cards
   resources :reviews
-  resources :users
-    get '/sign_up', to: 'users#new', as: :sign_up
+  resources :users, only: [:create], controller: 'registrations'
+    get '/sign_up', to: 'registrations#new', as: :sign_up
+
+  resources :users, only: [:update], controller: 'profile'
+    get '/edit_user', to: 'profile#edit', as: :edit_profile
+
   resources :sessions, only: [:new, :create, :destroy]
     get '/log_in', to: 'sessions#new', as: :log_in
     delete '/log_out', to: 'sessions#destroy', as: :log_out
