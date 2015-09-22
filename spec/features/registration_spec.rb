@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe "Registration" do
   before(:each) do
-        visit root_path
-        visit log_in_path
-        click_link "Sign up now"
-        visit sign_up_path
-    end
+    visit root_path
+    visit log_in_path
+    click_link "Sign up now"
+    visit sign_up_path
+  end
 
   it "as a new member" do
     fill_in "Name", with: "new member"
@@ -14,6 +14,7 @@ describe "Registration" do
     fill_in "Password", with: "blabla"
     fill_in "Confirm Password", with: "blabla"
     click_button "Register"
+    expect(page).to have_css(".alert-success")
     visit root_path
   end
 

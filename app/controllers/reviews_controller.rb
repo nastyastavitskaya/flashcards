@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :require_login
 
   def index
-    @card = Card.to_review.first
+    @card = current_user.cards.to_review.first
   end
 
   def create
