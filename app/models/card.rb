@@ -1,8 +1,9 @@
 class Card < ActiveRecord::Base
   validates :original_text,
-            :translated_text,
-            :user_id, presence: true
+            :translated_text, presence: true
+
   validate :same_texts
+
   before_save :set_default_review_date, on: :create
   scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
