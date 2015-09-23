@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Cards to review" do
   before(:each) do
-      @user = FactoryGirl.create(:user, name: 'steve jobs', email: 'steve@apple.com', password: 'applebeforeapple')
+      @user = create(:user)
       visit log_in_path
       fill_in "Email", with: "steve@apple.com"
       fill_in "Password", with: "applebeforeapple"
@@ -65,7 +65,7 @@ describe "Cards to review" do
     end
 
     it "when card not belongs to user" do
-      user = User.create(name: "lollipop", email: "lol@mail.com",
+      @user = User.create(name: "lollipop", email: "lol@mail.com",
         password: "1234", password_confirmation: "1234")
       visit log_in_path
       fill_in "Email", with: "lol@mail.com"
