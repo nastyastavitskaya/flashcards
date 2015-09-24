@@ -33,6 +33,7 @@ class CardsController < ApplicationController
   def update
     if @card.update(card_params)
       redirect_to @card
+      flash[:success] = "Successfully updated card."
     else
       render 'edit'
     end
@@ -40,13 +41,14 @@ class CardsController < ApplicationController
 
   def destroy
     @card.destroy
+    flash[:danger] = "Card deleted."
     redirect_to cards_path
   end
 
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image)
   end
 
 

@@ -8,6 +8,7 @@ class Card < ActiveRecord::Base
   scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
   belongs_to :user
+  mount_uploader :image, ImageUploader
 
   def set_default_review_date
     self.review_date = Time.now + 3.days

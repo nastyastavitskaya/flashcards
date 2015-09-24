@@ -1,6 +1,7 @@
  <div>
   <legend>Карточка для перевода</legend>
   <% if @card %>
+    <p><%= image_tag(@card.image_url.to_s) %></p>
     <strong><%= @card.original_text %></strong>
     <%= form_for :review, url: reviews_path,
                           html: {class: 'form' } do |f| %>

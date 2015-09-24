@@ -20,6 +20,8 @@ gem 'validates_email_format_of'
 gem 'bcrypt'
 gem 'jquery-rails'
 gem 'figaro'
+gem 'carrierwave'
+gem "mini_magick"
 
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'

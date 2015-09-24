@@ -1,9 +1,10 @@
-<%= simple_form_for card do |f| %>
+<%= simple_form_for card, html: { multipart: true } do |f| %>
   <%= render "shared/card_error" %>
   <%= f.input :original_text %>
   <%= f.input :translated_text %>
   <%= f.input :review_date %>
-  <%= f.button :submit %>
+  <%= f.file_field :image %>
+  <p><%= f.button :submit %></p>
 <% end %>
 
 
