@@ -50,7 +50,6 @@ describe "Cards to review" do
   end
 
 
-
   context "right card to review for user" do
     before(:each) do
       click_link "Добавить карточку"

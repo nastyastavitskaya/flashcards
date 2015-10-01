@@ -7,7 +7,7 @@ gem 'pg', '~> 0.18.2'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'font-awesome-sass'
 gem 'simple_form'
-gem "nokogiri", "~> 1.6.6"
+gem 'nokogiri', "~> 1.6.6"
 gem 'sqlite3'
 
 gem 'sass-rails', '~> 5.0'
@@ -20,6 +20,10 @@ gem 'validates_email_format_of'
 gem 'bcrypt'
 gem 'jquery-rails'
 gem 'figaro'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+gem 'fog-aws'
 
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'

@@ -1,25 +1,28 @@
 <table style="width:100%">
   <thead>
     <h1>Все карточки</h1>
-    <tr>
-      <th>Original Text</th>
-      <th>Translated Text</th>
-      <th>Review Date</th>
-    </tr>
   </thead>
-  <% @cards.each do |card| %>
   <tbody>
+  <% @cards.each do |card|  %>
     <tr>
-      <td><%= card.original_text %></td>
-      <td><%= card.translated_text %></td>
-      <td><%= card.review_date.strftime("%d/%m/%Y") %></td>
-      <td><%= link_to 'Show', card_path(card) %></td>
-      <td><%= link_to 'Edit', edit_card_path(card) %></td>
-      <td><%= link_to 'Destroy', card_path(card),
-              method: :delete,
-              data: { confirm: 'Are you sure?'} %></td>
+      <th><td><%= image_tag(card.image_url) %></td></th>
     </tr>
-  </tbody>
+    <tr>
+      <th>Original Text:</th><td><%= card.original_text %></td>
+    </tr>
+    <tr>
+      <th>Translated Text:</th><td><%= card.translated_text %></td>
+    </tr>
+    <tr>
+      <th>Review Date:</th>
+        <td><%= card.review_date.strftime('%d/%m/%Y') %></td>
+        <td><%= link_to 'Show', card_path(card) %></td>
+        <td><%= link_to 'Edit', edit_card_path(card) %></td>
+        <td><%= link_to 'Destroy', card_path(card),
+                                    method: :delete,
+                                    data: { confirm: 'Are you sure?'} %></td>
+    </tr>
   <% end %>
+  </tbody>
 </table>
 <%= render 'shared/footer' %>
