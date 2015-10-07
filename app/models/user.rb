@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :authentications
 
   has_many :cards
+  has_many :categories
 
   validates :name, presence: true, length: { in: 3..30 }
 

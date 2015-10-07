@@ -1,0 +1,39 @@
+<h1>All categories</h1>
+<% @categories.each do |category|  %>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <%= link_to category_path(category) do %>
+          <h3><%= category.name %></h3>
+        <% end %>
+        <%= link_to new_card_path do %>
+        <div class="btn btn-default" role="button"><i class="icon-plus"></i>
+          Add card</div>
+        <% end %>
+        <%= link_to do %>
+        <div class="btn btn-default" role="button"><i class="icon-ok"></i>
+          Activate</div>
+        <% end %>
+
+        <%= link_to edit_category_path(category) do %>
+        <p>
+        <div class="btn btn-default" role="button"><i class="icon-pencil"></i>
+          Edit</div>
+        <% end %>
+        <%= link_to category_path(category), method: :delete,
+          data: { confirm: 'Are you sure?'} do %>
+        <div class="btn btn-default" role="button"><i class="icon-trash"></i>
+          Destroy</div><% end %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<%= render 'shared/footer' %>
+
+
+
+
+
+

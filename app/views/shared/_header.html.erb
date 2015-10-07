@@ -4,8 +4,9 @@
       <%= link_to 'Flashcards', root_path, id: "logo" %>
     </div>
     <ul class="nav pull-right">
-      <li><%= link_to 'Все карточки', cards_path %></li>
-      <li><%= link_to "Добавить карточку", new_card_path %></li>
+      <li><%= link_to 'All categories', categories_path %></li>
+      <li><%= link_to "All cards", cards_path %></li>
+      <li><%= link_to "New category", new_category_path %></li>
     </ul>
     <ul class="nav pull-left">
     <% if current_user %>

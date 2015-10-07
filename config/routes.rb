@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'flashcards#index'
 
   resources :cards
+  resources :categories
   resources :reviews
   resources :users, only: [:create], controller: 'registrations'
     get '/sign_up', to: 'registrations#new', as: :sign_up

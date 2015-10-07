@@ -3,6 +3,7 @@
   <%= f.input :original_text %>
   <%= f.input :translated_text %>
   <%= f.input :review_date %>
+  <%= f.association :category, include_blank: false %>
   <%= f.input :image, input_html: { multipart: true } %>
   <p><%= f.button :submit %></p>
 <% end %>

@@ -1,0 +1,5 @@
+<%= simple_form_for @category do |f| %>
+  <%= render "shared/category_error" %>
+  <%= f.input :name %>
+  <p><%= f.button :submit %></p>
+<% end %>

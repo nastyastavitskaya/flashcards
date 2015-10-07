@@ -1,6 +1,7 @@
 class Card < ActiveRecord::Base
   validates :original_text,
             :translated_text, presence: true
+  validate :category_id
 
   validate :same_texts
 
@@ -8,6 +9,8 @@ class Card < ActiveRecord::Base
   scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
   belongs_to :user
+  belongs_to :category
+
   mount_uploader :image, ImageUploader
 
   def set_default_review_date

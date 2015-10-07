@@ -3,6 +3,10 @@
   <p><%= image_tag(@card.image_url) %></p>
 </p>
 <p>
+  <strong>Category:</strong>
+  <%= @card.category.name %>
+</p>
+<p>
   <strong>Original Text:</strong>
   <%= @card.original_text %>
 </p>
