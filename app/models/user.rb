@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
     config.authentications_class = Authentication
   end
 
+  belongs_to :current_category, class_name: "Category"
+
   has_many :authentications, :dependent => :destroy
   accepts_nested_attributes_for :authentications
 
@@ -17,6 +19,8 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true,
                     email_format: { message: "has invalid format" }
+
+
   before_save :downcase_email
 
 
@@ -24,4 +28,11 @@ class User < ActiveRecord::Base
     self.email = email.downcase
   end
 
+  def pending_cards
+    if current_category
+      current_category.cards.to_review
+    else
+      cards.to_review(Date.today)
+    end
+  end
 end

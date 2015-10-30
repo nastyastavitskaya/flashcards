@@ -1,12 +1,14 @@
 class Card < ActiveRecord::Base
   validates :original_text,
-            :translated_text, presence: true
-  validate :category_id
+            :translated_text,
+            :category_id, presence: true
 
   validate :same_texts
 
   before_save :set_default_review_date, on: :create
-  scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
+
+  scope :to_review, ->(date) { where("review_date <= ?", date).order('RANDOM()') }
+
 
   belongs_to :user
   belongs_to :category
@@ -26,6 +28,7 @@ class Card < ActiveRecord::Base
   def update_review_date
     update_attribute(:review_date, self.review_date + 3.days)
   end
+
 
 
   private

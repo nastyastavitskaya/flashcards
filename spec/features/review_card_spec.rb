@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 describe "Cards to review" do
-  before(:each) do
+
+  context "#no cards to review" do
+    before(:each) do
       @user = create(:user)
       visit log_in_path
       fill_in "Email", with: "steve@apple.com"
       fill_in "Password", with: "applebeforeapple"
       click_button "Log in"
       visit root_path
-    end
-
-  context "no cards to review" do
-    before(:each) do
-      click_link "Добавить карточку"
+      click_link "New Category"
+      @category = create(:category, user_id: @user.id)
       card = create(:card, user_id: @user.id)
       Timecop.freeze(Date.today - 5.days)
       visit root_path
@@ -26,10 +25,17 @@ describe "Cards to review" do
   end
 
 
-  context "new cards to review" do
+  context "#new cards to review" do
     before(:each) do
-      click_link "Добавить карточку"
-      card = FactoryGirl.create(:card, user_id: @user.id)
+      @user = create(:user)
+      visit log_in_path
+      fill_in "Email", with: "steve@apple.com"
+      fill_in "Password", with: "applebeforeapple"
+      click_button "Log in"
+      visit root_path
+      click_link "New Category"
+      @category = create(:category, user_id: @user.id)
+      card = FactoryGirl.create(:card, user_id: @user.id, category_id: @category.id)
       Timecop.freeze(Date.today + 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
@@ -47,13 +53,22 @@ describe "Cards to review" do
       click_button "Проверить"
       expect(page).to have_content "Правильно!"
     end
-  end
+   end
 
 
-  context "right card to review for user" do
+
+
+  context "#user's cards to review" do
     before(:each) do
-      click_link "Добавить карточку"
-      card = create(:card, user_id: @user.id)
+      @user = create(:user)
+      visit log_in_path
+      fill_in "Email", with: "steve@apple.com"
+      fill_in "Password", with: "applebeforeapple"
+      click_button "Log in"
+      visit root_path
+      click_link "New Category"
+      @category = create(:category, user_id: @user.id)
+      card = create(:card, user_id: @user.id, category_id: @category.id)
       Timecop.freeze(Date.today + 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
@@ -75,4 +90,4 @@ describe "Cards to review" do
       expect(page).to have_content("Новых карточек для проверки нет")
     end
   end
-end
+ end

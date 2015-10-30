@@ -3,7 +3,7 @@ require 'rails_helper'
 describe User do
 
   it { should have_many(:cards) }
-
+  it { should have_many(:categories)}
 
   describe "user name" do
     it "should not be too long" do
@@ -41,10 +41,7 @@ describe User do
 
     context "existing user" do
       let(:user) do
-        u = User.create name: "gogol",
-                         email: "gogol@gmail.com",
-                         password: "flower",
-                         password_confirmation: "flower"
+        u = User.create name: "gogol", email: "gogol@gmail.com", password: "flower", password_confirmation: "flower"
       end
 
       it "should be valid with no changes" do

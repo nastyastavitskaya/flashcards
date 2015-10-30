@@ -11,6 +11,11 @@ class ProfileController < ApplicationController
     end
   end
 
+  def set_current_category
+    current_user.current_category(params[:category_id])
+    flash[:success] = "Category selected!"
+    redirect_to root_path
+  end
 
   private
   def user_params

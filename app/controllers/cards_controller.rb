@@ -1,64 +1,64 @@
 class CardsController < ApplicationController
-  before_action :find_card,
-                only: [:show, :edit, :update, :destroy]
-  before_action :require_login
-
+  before_action :find_category
 
   def index
-    @cards = current_user.cards.all
   end
 
 
   def show
+    @card = @category.cards.find(params[:id])
   end
 
 
   def new
-    @card = current_user.cards.new
-  end
-
-  def edit
+    @card = @category.cards.new
   end
 
   def create
-    @card = current_user.cards.new(card_params)
-
+    @card = @category.cards.new(card_params)
     if @card.save
-      redirect_to @card
+      flash[:success] = "Added card."
+      redirect_to category_cards_path
     else
+      flash[:danger] = "There was a problem adding that card."
       render 'new'
     end
   end
 
+  def edit
+    @card = @category.cards.find(params[:id])
+  end
+
   def update
-    if @card.update(card_params)
-      redirect_to @card
-      flash[:success] = "Successfully updated card."
+     @card = @category.cards.find(params[:id])
+    if @card.update_attributes(card_params)
+      flash[:success] = "Saved card."
+      redirect_to category_cards_path
     else
+      flash[:error] = "That card could not be saved."
       render 'edit'
     end
   end
 
   def destroy
+    @card = @category.cards.find(params[:id])
     @card.destroy
     flash[:danger] = "Card deleted."
-    redirect_to cards_path
+    redirect_to category_cards_path
+  end
+
+  def url_options
+    { category_id: params[:category_id] }.merge(super)
   end
 
   private
 
+  def find_category
+    @category = Category.find(params[:category_id])
+  end
+
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :category_id)
-  end
-
-
-  def find_card
-    @card = current_user.cards.find(params[:id])
-  end
-
-  def not_authenticated
-    flash[:danger] = "Please log in first!"
-    redirect_to log_in_path
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image)
   end
 
 end
