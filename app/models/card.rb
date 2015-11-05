@@ -7,13 +7,11 @@ class Card < ActiveRecord::Base
 
   before_save :set_default_review_date, on: :create
 
-  scope :to_review, ->(date) { where("review_date <= ?", date).order('RANDOM()') }
-
-
   belongs_to :user
   belongs_to :category
 
   mount_uploader :image, ImageUploader
+
 
   def set_default_review_date
     self.review_date = Time.now + 3.days

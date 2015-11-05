@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20151010005058) do
     t.datetime "updated_at"
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
-    t.integer  "currrent_category_id"
+    t.integer  "current_category_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

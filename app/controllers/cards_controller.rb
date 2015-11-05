@@ -54,7 +54,7 @@ class CardsController < ApplicationController
   private
 
   def find_category
-    @category = Category.find(params[:category_id])
+    @category = current_user.categories.find(params[:category_id])
   end
 
   def card_params

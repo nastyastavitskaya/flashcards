@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources :users, only: [:update], controller: 'profile'
     get '/profile/edit', to: 'profile#edit', as: :edit_profile
 
-    put 'set_current_category' => 'profile#set_current_category'
+  resources :users, controller: 'profile' do
+    put 'set_current_category', on: :member
+  end
 
   resources :sessions, only: [:new, :create, :destroy]
     get '/log_in', to: 'sessions#new', as: :log_in

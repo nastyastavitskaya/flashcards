@@ -7,7 +7,7 @@
         <%= link_to category_cards_path(category) do %>
           <h3><%= category.name %></h3>
         <% end %>
-        <%= link_to set_current_category_path(category), method: :put do %>
+        <%= link_to set_current_category_user_path(category), method: :put do %>
         <div class="btn btn-default" role="button"><i class="icon-ok"></i>
         Activate</div>
         <% end %>
@@ -26,9 +26,3 @@
 </div>
 <% end %>
 <h6><%= render 'shared/footer' %></h6>
-
-
-
-
-
-

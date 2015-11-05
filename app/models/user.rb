@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   accepts_nested_attributes_for :authentications
 
-  has_many :cards
-  has_many :categories
+  has_many :cards, dependent: :destroy
+  has_many :categories, dependent: :destroy
 
   validates :name, presence: true, length: { in: 3..30 }
 
@@ -30,9 +30,9 @@ class User < ActiveRecord::Base
 
   def pending_cards
     if current_category
-      current_category.cards.to_review
+      current_category.cards.order('RANDOM()')
     else
-      cards.to_review(Date.today)
+      cards(review_date: Date.today).order('RANDOM()')
     end
   end
 end
