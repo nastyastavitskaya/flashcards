@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     if current_category
       current_category.cards.order('RANDOM()')
     else
-      cards.where(review_date: Date.today - 3.days).order('RANDOM()')
+      cards.where(review_date: Date.today + 3.days).order('RANDOM()')
     end
   end
 end

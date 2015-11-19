@@ -23,7 +23,7 @@ describe "Cards to review" do
     before(:each) do
       click_link "New Category"
       @category = create(:category, user_id: @user.id)
-      card = FactoryGirl.create(:card, user_id: @user.id, category_id: @category.id)
+      @card = create(:card, review_date: Date.today + 3.days, user_id: @user.id, category_id: @category.id)
       visit root_path
       click_link "Перейти к тренировщику"
       visit reviews_path
@@ -32,7 +32,7 @@ describe "Cards to review" do
     it "input wrong translation" do
       fill_in "Введите перевод:", with: "doggg"
       click_button "Проверить"
-      expect(page).to have_content "Не правильно!"
+      expect(page).to have_content "Неправильно!"
     end
 
     it "input right translation" do
