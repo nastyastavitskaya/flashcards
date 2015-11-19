@@ -1,7 +1,6 @@
 class Card < ActiveRecord::Base
   validates :original_text,
-            :translated_text,
-            :category_id, presence: true
+            :translated_text, presence: true
 
   validate :same_texts
 

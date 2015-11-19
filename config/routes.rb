@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   root 'flashcards#index'
 
+  resources :cards, only: [:new, :create]
+  post "/cards/new" => "cards#create"
+
   resources :categories do
     resources :cards
   end

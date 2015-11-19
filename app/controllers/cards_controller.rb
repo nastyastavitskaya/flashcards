@@ -1,28 +1,28 @@
 class CardsController < ApplicationController
-  before_action :find_category
+  before_action :find_category, except: [:new, :create ]
 
   def index
   end
 
-
-  def show
-    @card = @category.cards.find(params[:id])
-  end
-
-
   def new
-    @card = @category.cards.new
+    @category = current_user.categories.new
+    @card = current_user.cards.new
   end
 
   def create
-    @card = @category.cards.new(card_params)
+    @category = current_user.categories.new(card_params[:category])
+    @card = @category.cards.new(card_params.except(:category))
     if @card.save
       flash[:success] = "Added card."
-      redirect_to category_cards_path
+      redirect_to categories_path
     else
       flash[:danger] = "There was a problem adding that card."
       render 'new'
     end
+  end
+
+  def show
+    @card = @category.cards.find(params[:id])
   end
 
   def edit
@@ -31,7 +31,7 @@ class CardsController < ApplicationController
 
   def update
      @card = @category.cards.find(params[:id])
-    if @card.update_attributes(card_params)
+    if @card.update_attributes(card_params.except(:category))
       flash[:success] = "Saved card."
       redirect_to category_cards_path
     else
@@ -47,10 +47,6 @@ class CardsController < ApplicationController
     redirect_to category_cards_path
   end
 
-  def url_options
-    { category_id: params[:category_id] }.merge(super)
-  end
-
   private
 
   def find_category
@@ -58,7 +54,7 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :category_id, category: [:name])
   end
 
 end

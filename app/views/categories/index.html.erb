@@ -1,28 +1,26 @@
-<h1>Categories</h1>
-<% @categories.each do |category|  %>
-<div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <div class="caption">
-        <%= link_to category_cards_path(category) do %>
-          <h3><%= category.name %></h3>
-        <% end %>
-        <%= link_to set_current_category_user_path(category), method: :put do %>
-        <div class="btn btn-default" role="button"><i class="icon-ok"></i>
-        Activate</div>
-        <% end %>
-        <%= link_to edit_category_path(category) do %>
-        <p>
-        <div class="btn btn-default" role="button"><i class="icon-pencil"></i>
-          Edit</div>
-        <% end %>
-        <%= link_to category_path(category), method: :delete,
-          data: { confirm: 'Are you sure?'} do %>
-        <div class="btn btn-default" role="button"><i class="icon-trash"></i>
-          Destroy</div><% end %></p>
+<div align="center">
+  <h1>Categories</h1>
+  <% @categories.each do |category|  %>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <div class="caption">
+          <%= link_to category_cards_path(category) do %>
+            <h3><%= category.name %></h3><% end %>
+          <%= link_to set_current_category_user_path(category), method: :put do %>
+          <div class="btn btn-default" role="button"><i class="icon-ok"></i>
+          Activate</div><% end %>
+          <%= link_to edit_category_path(category) do %>
+          <div class="btn btn-default" role="button"><i class="icon-pencil"></i>
+            Edit</div><% end %>
+          <%= link_to category_path(category), method: :delete,
+            data: { confirm: 'Are you sure?'} do %>
+          <div class="btn btn-default" role="button"><i class="icon-trash"></i>
+            Destroy</div><% end %>
+        </div>
       </div>
     </div>
   </div>
+  <% end %>
 </div>
-<% end %>
 <h6><%= render 'shared/footer' %></h6>

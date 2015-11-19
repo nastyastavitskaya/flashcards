@@ -13,8 +13,8 @@ class ProfileController < ApplicationController
 
   def set_current_category
     @category = current_user.categories.where(id: params[:id]).first
-    if current_user.update_attribute(:current_category_id, @category.id)
-      flash[:success] = "Category selected!"
+    if current_user.update(:current_category_id => @category.id)
+      flash[:success] = "Selected category: #{@category.name}"
       redirect_to root_path
     else
       flash[:error] = "Error!"
