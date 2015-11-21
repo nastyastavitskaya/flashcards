@@ -1,10 +1,12 @@
 <div align="center">
 <legend>Card to Review</legend>
-
-<% if @card %>
-  <h4>Selected category: <%= @card.category.name %> </h4>
-
-  <p><%= image_tag(@card.image_url) %></p>
+  <% if @card %>
+  <h4>
+    Selected category: <%= @card.category.name %>
+  </h4>
+  <p>
+    <%= image_tag(@card.image_url) %>
+  </p>
   <strong><%= @card.original_text %></strong>
   <%= form_for :review, url: reviews_path, html: {class: 'form' } do |f| %>
     <%= f.hidden_field :card_id, value: @card.id %>

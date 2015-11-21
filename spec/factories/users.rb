@@ -12,5 +12,6 @@ FactoryGirl.define do
     email "steve@apple.com"
     password "applebeforeapple"
     password_confirmation "applebeforeapple"
+    current_category_id 1
   end
 end

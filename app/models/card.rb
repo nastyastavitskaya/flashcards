@@ -11,6 +11,7 @@ class Card < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
   def set_default_review_date
     self.review_date = Time.now + 3.days

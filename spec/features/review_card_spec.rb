@@ -10,10 +10,17 @@ describe "Cards to review" do
     visit root_path
   end
 
-  context "#no category" do
-    it "nothing to review" do
+  context "#no cards" do
+    before(:each) do
+      click_link "New Card"
+      card = create(:card, user_id: @user.id)
+      Timecop.freeze(Date.today - 5.days)
+      visit root_path
       click_link "Перейти к тренировщику"
       visit reviews_path
+    end
+
+    it "no new cards to review" do
       expect(page).to have_content "Новых карточек для проверки нет"
     end
   end
@@ -23,7 +30,8 @@ describe "Cards to review" do
     before(:each) do
       click_link "New Category"
       @category = create(:category, user_id: @user.id)
-      @card = create(:card, review_date: Date.today + 3.days, user_id: @user.id, category_id: @category.id)
+      @card = create(:card, user_id: @user.id, category_id: @category.id)
+      Timecop.freeze(Date.today + 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
       visit reviews_path
@@ -49,6 +57,7 @@ describe "Cards to review" do
       card = create(:card, user_id: @user.id, category_id: @category.id)
       visit root_path
       click_link "Перейти к тренировщику"
+      visit reviews_path
     end
 
     it "when card belongs to user" do
@@ -65,6 +74,22 @@ describe "Cards to review" do
       visit root_path
       click_link "Перейти к тренировщику"
       expect(page).to have_content("Новых карточек для проверки нет")
+    end
+  end
+
+  context "card from category" do
+    before(:each) do
+      @category_one = create(:category, name: "first", user_id: @user.id)
+      @category_two = create(:category, name: "second", user_id: @user.id)
+      @card_one = create(:card, original_text: "one", translated_text: "один", user_id: @user.id, category_id: @category_one.id)
+      @card_two = create(:card, original_text: "two", translated_text: "два", user_id: @user.id, category_id: @category_two.id)
+      visit categories_path
+    end
+
+    it "shows right card" do
+      @user.update(current_category_id: @category_one.id)
+      visit reviews_path
+      expect(page).to have_content "one"
     end
   end
 end

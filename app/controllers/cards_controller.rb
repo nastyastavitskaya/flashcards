@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :find_category, except: [:new, :create ]
+  before_action :find_category, except: [:new, :create]
 
   def index
   end
@@ -22,15 +22,12 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = @category.cards.find(params[:id])
   end
 
   def edit
-    @card = @category.cards.find(params[:id])
   end
 
   def update
-     @card = @category.cards.find(params[:id])
     if @card.update_attributes(card_params.except(:category))
       flash[:success] = "Saved card."
       redirect_to category_cards_path
@@ -41,7 +38,6 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    @card = @category.cards.find(params[:id])
     @card.destroy
     flash[:danger] = "Card deleted."
     redirect_to category_cards_path
