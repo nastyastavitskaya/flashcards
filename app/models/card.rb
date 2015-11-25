@@ -6,7 +6,6 @@ class Card < ActiveRecord::Base
 
   before_save :set_default_review_date, on: :create
 
-  belongs_to :user
   belongs_to :category
 
   mount_uploader :image, ImageUploader
@@ -27,7 +26,14 @@ class Card < ActiveRecord::Base
     update_attribute(:review_date, self.review_date + 3.days)
   end
 
-
+  def self.create_with_category(params)
+    category_params = params.delete(:category)
+    if params[:category_id].blank?
+      @category = Category.create(category_params)
+      params.deep_merge!(category_id: @category.id)
+    end
+    create(params)
+  end
 
   private
 

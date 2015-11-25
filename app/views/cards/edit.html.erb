@@ -3,7 +3,8 @@
   <%= f.input :original_text, placeholder: 'Enter original text' %>
   <%= f.input :translated_text, placeholder: 'Enter translated text' %>
   <%= f.input :image, input_html: { multipart: true } %>
+  <%= f.association :category, collection: current_user.categories.order(:name), prompt: "Choose existing category" %>
   <p><%= f.submit 'Save', class: "btn btn-success" %></p>
-<% end %>
+  <% end %>
 <h6><%= link_to 'Back', category_cards_path %></h6>
 

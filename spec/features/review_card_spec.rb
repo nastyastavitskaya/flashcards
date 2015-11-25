@@ -13,7 +13,7 @@ describe "Cards to review" do
   context "#no cards" do
     before(:each) do
       click_link "New Card"
-      card = create(:card, user_id: @user.id)
+      card = create(:card)
       Timecop.freeze(Date.today - 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
@@ -30,7 +30,7 @@ describe "Cards to review" do
     before(:each) do
       click_link "New Category"
       @category = create(:category, user_id: @user.id)
-      @card = create(:card, user_id: @user.id, category_id: @category.id)
+      @card = create(:card, category_id: @category.id)
       Timecop.freeze(Date.today + 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
@@ -54,7 +54,7 @@ describe "Cards to review" do
     before(:each) do
       click_link "New Category"
       @category = create(:category, user_id: @user.id)
-      card = create(:card, user_id: @user.id, category_id: @category.id)
+      card = create(:card, category_id: @category.id)
       visit root_path
       click_link "Перейти к тренировщику"
       visit reviews_path
@@ -81,8 +81,8 @@ describe "Cards to review" do
     before(:each) do
       @category_one = create(:category, name: "first", user_id: @user.id)
       @category_two = create(:category, name: "second", user_id: @user.id)
-      @card_one = create(:card, original_text: "one", translated_text: "один", user_id: @user.id, category_id: @category_one.id)
-      @card_two = create(:card, original_text: "two", translated_text: "два", user_id: @user.id, category_id: @category_two.id)
+      @card_one = create(:card, original_text: "one", translated_text: "один", category_id: @category_one.id)
+      @card_two = create(:card, original_text: "two", translated_text: "два", category_id: @category_two.id)
       visit categories_path
     end
 

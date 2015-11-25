@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :find_category, except: [:new, :create]
+  before_action :find_card, only: [:show, :edit, :update, :destroy]
 
   def index
   end
@@ -10,9 +11,8 @@ class CardsController < ApplicationController
   end
 
   def create
-    @category = current_user.categories.new(card_params[:category])
-    @card = @category.cards.new(card_params.except(:category))
-    if @card.save
+    @card = Card.create_with_category(card_params)
+    if @card.errors.empty?
       flash[:success] = "Added card."
       redirect_to categories_path
     else
@@ -49,8 +49,12 @@ class CardsController < ApplicationController
     @category = current_user.categories.find(params[:category_id])
   end
 
+  def find_card
+    @card = @category.cards.find(params[:id])
+  end
+
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :category_id, category: [:name])
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :category_id, category: [:name]).deep_merge(category: {user_id: current_user.id})
   end
 
 end

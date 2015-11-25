@@ -1,13 +1,13 @@
-<%= simple_form_for @card do |f| %>
+<%= simple_form_for card do |f| %>
   <%= f.input :original_text, placeholder: 'Enter original text' %>
   <%= f.input :translated_text, placeholder: 'Enter translated text' %>
   <%= f.input :review_date, order: [:day, :month, :year] %>
   <%= f.input :image, input_html: { multipart: true } %>
-  <%= f.association :category, include_blank: false,
-  collection: current_user.categories.order(:name), prompt: "Choose existing category" %>
-  <%= f.simple_fields_for @category do |category| %>
-    <%= category.input :name, label: "Or create new category", presence: false %>
+  <%= f.association :category, collection: current_user.categories.order(:name), prompt: "Choose existing category" %>
+  <%= f.simple_fields_for :category do |category| %>
+    <%= category.input :name, label: "Or create new category", required: false %>
     <% end %>
+
   <p><%= f.submit 'Save', class: "btn btn-success" %></p>
 <% end %>
 
