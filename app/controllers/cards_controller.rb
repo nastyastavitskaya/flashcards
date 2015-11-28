@@ -1,40 +1,38 @@
 class CardsController < ApplicationController
-  before_action :find_card,
-                only: [:show, :edit, :update, :destroy]
-  before_action :require_login
-
+  before_action :find_category, except: [:new, :create]
+  before_action :find_card, only: [:show, :edit, :update, :destroy]
 
   def index
-    @cards = current_user.cards.all
   end
-
-
-  def show
-  end
-
 
   def new
+    @category = current_user.categories.new
     @card = current_user.cards.new
+  end
+
+  def create
+    @card = Card.create_with_category(card_params)
+    if @card.errors.empty?
+      flash[:success] = "Added card."
+      redirect_to categories_path
+    else
+      flash[:danger] = "There was a problem adding that card."
+      render 'new'
+    end
+  end
+
+  def show
   end
 
   def edit
   end
 
-  def create
-    @card = current_user.cards.new(card_params)
-
-    if @card.save
-      redirect_to @card
-    else
-      render 'new'
-    end
-  end
-
   def update
-    if @card.update(card_params)
-      redirect_to @card
-      flash[:success] = "Successfully updated card."
+    if @card.update_attributes(card_params.except(:category))
+      flash[:success] = "Saved card."
+      redirect_to category_cards_path
     else
+      flash[:error] = "That card could not be saved."
       render 'edit'
     end
   end
@@ -42,23 +40,21 @@ class CardsController < ApplicationController
   def destroy
     @card.destroy
     flash[:danger] = "Card deleted."
-    redirect_to cards_path
+    redirect_to category_cards_path
   end
 
   private
 
-  def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :image)
+  def find_category
+    @category = current_user.categories.find(params[:category_id])
   end
-
 
   def find_card
-    @card = current_user.cards.find(params[:id])
+    @card = @category.cards.find(params[:id])
   end
 
-  def not_authenticated
-    flash[:danger] = "Please log in first!"
-    redirect_to log_in_path
+  def card_params
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :category_id, category: [:name]).deep_merge(category: {user_id: current_user.id})
   end
 
 end

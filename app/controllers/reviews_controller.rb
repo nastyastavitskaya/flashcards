@@ -2,15 +2,16 @@ class ReviewsController < ApplicationController
   before_action :require_login
 
   def index
-    @card = current_user.cards.to_review.first
+    @card = current_user.pending_cards.first
   end
+
 
   def create
     @card = Card.find(review_params[:card_id])
     if @card.check_translation(review_params[:user_translated_text])
       flash[:success] = "Правильно!"
     else
-      flash[:danger] = "Не правильно!"
+      flash[:danger] = "Неправильно!"
     end
     redirect_to reviews_path
   end

@@ -1,17 +1,21 @@
- <div>
-  <legend>Карточка для перевода</legend>
+<div align="center">
+<legend>Card to Review</legend>
   <% if @card %>
-    <p><%= image_tag(@card.image_url) %></p>
-    <strong><%= @card.original_text %></strong>
-    <%= form_for :review, url: reviews_path,
-                          html: {class: 'form' } do |f| %>
+  <h4>
+    Selected category: <%= @card.category.name %>
+  </h4>
+  <p>
+    <%= image_tag(@card.image_url) %>
+  </p>
+  <strong><%= @card.original_text %></strong>
+  <%= form_for :review, url: reviews_path, html: {class: 'form' } do |f| %>
     <%= f.hidden_field :card_id, value: @card.id %>
     <%= f.label :user_translated_text, "Введите перевод:" %>
     <%= f.text_field :user_translated_text %>
     <div><%= f.submit "Проверить", class: "btn btn-primary" %></div>
+    <% end %>
+  <% else %>
+    <strong>"Новых карточек для проверки нет!"</strong>
+<% end %>
 </div>
-<% end %>
-<% else %>
-  <strong>"Новых карточек для проверки нет!"</strong>
-<% end %>
- <%= render 'shared/footer' %>
+

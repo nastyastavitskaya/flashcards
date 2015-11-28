@@ -2,18 +2,18 @@ require 'rails_helper'
 
 describe "Cards to review" do
   before(:each) do
-      @user = create(:user)
-      visit log_in_path
-      fill_in "Email", with: "steve@apple.com"
-      fill_in "Password", with: "applebeforeapple"
-      click_button "Log in"
-      visit root_path
-    end
+    @user = create(:user)
+    visit log_in_path
+    fill_in "Email", with: "steve@apple.com"
+    fill_in "Password", with: "applebeforeapple"
+    click_button "Log in"
+    visit root_path
+  end
 
-  context "no cards to review" do
+  context "#no cards" do
     before(:each) do
-      click_link "Добавить карточку"
-      card = create(:card, user_id: @user.id)
+      click_link "New Card"
+      card = create(:card)
       Timecop.freeze(Date.today - 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
@@ -26,10 +26,11 @@ describe "Cards to review" do
   end
 
 
-  context "new cards to review" do
+  context "#new cards to review" do
     before(:each) do
-      click_link "Добавить карточку"
-      card = FactoryGirl.create(:card, user_id: @user.id)
+      click_link "New Category"
+      @category = create(:category, user_id: @user.id)
+      @card = create(:card, category_id: @category.id)
       Timecop.freeze(Date.today + 5.days)
       visit root_path
       click_link "Перейти к тренировщику"
@@ -39,7 +40,7 @@ describe "Cards to review" do
     it "input wrong translation" do
       fill_in "Введите перевод:", with: "doggg"
       click_button "Проверить"
-      expect(page).to have_content "Не правильно!"
+      expect(page).to have_content "Неправильно!"
     end
 
     it "input right translation" do
@@ -49,14 +50,14 @@ describe "Cards to review" do
     end
   end
 
-
-  context "right card to review for user" do
+  context "#user's category to review" do
     before(:each) do
-      click_link "Добавить карточку"
-      card = create(:card, user_id: @user.id)
-      Timecop.freeze(Date.today + 5.days)
+      click_link "New Category"
+      @category = create(:category, user_id: @user.id)
+      card = create(:card, category_id: @category.id)
       visit root_path
       click_link "Перейти к тренировщику"
+      visit reviews_path
     end
 
     it "when card belongs to user" do
@@ -75,4 +76,21 @@ describe "Cards to review" do
       expect(page).to have_content("Новых карточек для проверки нет")
     end
   end
+
+  context "card from category" do
+    before(:each) do
+      @category_one = create(:category, name: "first", user_id: @user.id)
+      @category_two = create(:category, name: "second", user_id: @user.id)
+      @card_one = create(:card, original_text: "one", translated_text: "один", category_id: @category_one.id)
+      @card_two = create(:card, original_text: "two", translated_text: "два", category_id: @category_two.id)
+      visit categories_path
+    end
+
+    it "shows right card" do
+      @user.update(current_category_id: @category_one.id)
+      visit reviews_path
+      expect(page).to have_content "one"
+    end
+  end
 end
+

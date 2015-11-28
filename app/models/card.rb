@@ -5,10 +5,12 @@ class Card < ActiveRecord::Base
   validate :same_texts
 
   before_save :set_default_review_date, on: :create
-  scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
-  belongs_to :user
+  belongs_to :category
+
   mount_uploader :image, ImageUploader
+
+  scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
 
   def set_default_review_date
     self.review_date = Time.now + 3.days
@@ -24,6 +26,14 @@ class Card < ActiveRecord::Base
     update_attribute(:review_date, self.review_date + 3.days)
   end
 
+  def self.create_with_category(params)
+    category_params = params.delete(:category)
+    if params[:category_id].blank?
+      @category = Category.create(category_params)
+      params.deep_merge!(category_id: @category.id)
+    end
+    create(params)
+  end
 
   private
 

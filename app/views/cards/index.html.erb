@@ -1,28 +1,30 @@
-<table style="width:100%">
-  <thead>
-    <h1>Все карточки</h1>
-  </thead>
-  <tbody>
-  <% @cards.each do |card|  %>
-    <tr>
-      <th><td><%= image_tag(card.image_url) %></td></th>
-    </tr>
-    <tr>
-      <th>Original Text:</th><td><%= card.original_text %></td>
-    </tr>
-    <tr>
-      <th>Translated Text:</th><td><%= card.translated_text %></td>
-    </tr>
-    <tr>
-      <th>Review Date:</th>
-        <td><%= card.review_date.strftime('%d/%m/%Y') %></td>
-        <td><%= link_to 'Show', card_path(card) %></td>
-        <td><%= link_to 'Edit', edit_card_path(card) %></td>
-        <td><%= link_to 'Destroy', card_path(card),
-                                    method: :delete,
-                                    data: { confirm: 'Are you sure?'} %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<%= render 'shared/footer' %>
+<div align="center">
+  <table style="width:100%">
+    <thead>
+      <h1><%= @category.name %></h1>
+    </thead>
+    <tbody>
+    <tr><th>
+    <% @category.cards.each do |card|  %>
+      <tr>
+        <th><td><%= image_tag(card.image_url) %></td></th>
+      </tr>
+      <tr>
+        <th>Original Text:</th><td><%= card.original_text %></td>
+      </tr>
+      <tr>
+        <th>Translated Text:</th><td><%= card.translated_text %></td>
+      </tr>
+      <tr>
+        <th>Review Date:</th>
+          <td><%= card.review_date.strftime('%d/%m/%Y') %></td>
+          <td><%= link_to 'Show', category_card_path(@category, card) %></td>
+          <td><%= link_to 'Edit', edit_category_card_path(@category, card) %></td>
+          <td><%= link_to 'Destroy', category_card_path(@category, card), method: :delete, data: { confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+<h6><%= link_to 'Back', categories_path %></h6>

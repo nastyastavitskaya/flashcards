@@ -3,13 +3,22 @@ Rails.application.routes.draw do
 
   root 'flashcards#index'
 
-  resources :cards
+  resources :cards, only: [:new, :create]
+  post "/cards/new" => "cards#create"
+
+  resources :categories do
+    resources :cards
+  end
   resources :reviews
   resources :users, only: [:create], controller: 'registrations'
     get '/sign_up', to: 'registrations#new', as: :sign_up
 
   resources :users, only: [:update], controller: 'profile'
     get '/profile/edit', to: 'profile#edit', as: :edit_profile
+
+  resources :users, controller: 'profile' do
+    put 'set_current_category', on: :member
+  end
 
   resources :sessions, only: [:new, :create, :destroy]
     get '/log_in', to: 'sessions#new', as: :log_in
