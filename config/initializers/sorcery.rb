@@ -113,14 +113,14 @@ Rails.application.config.sorcery.configure do |config|
     config.twitter.key = ENV["SORCERY_TWIITER_KEY"]
     config.twitter.secret = ENV["SORCERY_TWIITER_SECRET"]
     config.twitter.callback_url = ENV["SORCERY_TWIITER_CALLBACK_URL"]
-    config.twitter.user_info_mapping = { profile_image_url: "profile_image_url", name: "screen_name" }
+    config.twitter.user_info_mapping = { email: "screen_name" }
   #
     config.facebook.key = ENV["SORCERY_FACEBOOK_KEY"]
     config.facebook.secret = ENV["SORCERY_FACEBOOK_SECRET"]
     config.facebook.callback_url = ENV["SORCERY_FACEBOOK_CALLBACK_URL"]
-    config.facebook.user_info_mapping = { name: "name", email: "email" }
-    config.facebook.access_permissions = ["email", "publish_actions"]
-    config.facebook.display = "page"
+    config.facebook.user_info_mapping = { email: "email" }
+    config.facebook.access_permissions = ["email"]
+    config.facebook.display = "popup"
     # config.facebook.api_version = "v2.4"
   #
   # config.github.key = ""
@@ -177,7 +177,7 @@ Rails.application.config.sorcery.configure do |config|
     # specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
     #
-     user.username_attribute_names = :email
+       user.username_attribute_names = [:email]
 
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
@@ -459,5 +459,5 @@ Rails.application.config.sorcery.configure do |config|
 
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
-  config.user_class = User
+  config.user_class = "User"
 end

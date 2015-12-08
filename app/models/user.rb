@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   belongs_to :current_category, class_name: "Category"
 
-  has_many :authentications, :dependent => :destroy
+  has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
   has_many :categories, dependent: :destroy
@@ -20,12 +20,12 @@ class User < ActiveRecord::Base
                     email_format: { message: "has invalid format" }
 
 
-  # before_save :downcase_email
+  before_save :downcase_email
 
 
-  # def downcase_email
-  #   self.email = email.downcase
-  # end
+  def downcase_email
+    self.email = email.downcase
+  end
 
   def pending_cards
     if current_category
