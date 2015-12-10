@@ -11,7 +11,7 @@ class OauthsController < ApplicationController
       redirect_to root_path
       flash[:success] = "Logged in from #{provider.titleize}!"
     else
-      begin
+     begin
         @user = create_from(provider)
         reset_session
         auto_login(@user)

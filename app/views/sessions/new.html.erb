@@ -12,11 +12,11 @@
 
  <p><%= submit_tag 'Log in', class: 'btn btn-primary btn-lg' %></p>
 
-  <%= link_to auth_at_provider_path(:provider => :facebook) do %>
+  <%= link_to auth_at_provider_path(provider: :facebook) do %>
     <button class="btn btn-facebook">
     <i class="fa fa-facebook"></i> | Log in with Facebook</button>
   <% end %>
-  <%= link_to auth_at_provider_path(:provider => :twitter) do %>
+  <%= link_to auth_at_provider_path(provider: :twitter) do %>
     <button class="btn btn-twitter">
     <i class="fa fa-twitter"></i> | Log in with Twitter</button>
   <% end %>
