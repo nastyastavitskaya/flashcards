@@ -12,7 +12,7 @@ describe "Cards to review" do
 
   context "#no cards" do
     before(:each) do
-      click_link "Новая Карточка"
+      click_link "New Card"
       card = create(:card)
       Timecop.freeze(Date.today - 5.days)
       visit root_path
