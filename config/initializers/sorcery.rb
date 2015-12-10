@@ -177,11 +177,8 @@ Rails.application.config.sorcery.configure do |config|
     # specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
     #
-<<<<<<< HEAD
-     user.username_attribute_names = [:email]
-=======
-       user.username_attribute_names = [:email]
->>>>>>> 01b1dc6b0a012b317c3dbe0db05bd7dbf91de638
+
+      user.username_attribute_names = [:email]
 
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
