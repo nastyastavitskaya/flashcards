@@ -6,8 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.create!
-    if login(params[:email], params[:password], params[:remember_me])
+    if @user = login(params[:email], params[:password], params[:remember_me])
       flash[:success] = "Welcome back!"
       redirect_back_or_to root_path
     else
