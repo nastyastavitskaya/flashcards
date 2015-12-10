@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to 'Flashcards', root_path, id: "logo" %>
+      <%= link_to 'Флэшкарточкер', root_path, id: "logo" %>
     </div>
     <ul class="nav pull-right">
       <li><%= link_to 'New Card', new_card_path %></li>
@@ -10,7 +10,7 @@
     </ul>
     <ul class="nav pull-left">
     <% if current_user %>
-      <li class="disabled"><%= link_to current_user.name %></li>
+      <li class="disabled"><%= link_to current_user.name || current_user.email %></li>
       <li><%= link_to "Edit Profile", edit_profile_path(current_user) %>
       </li>
       <li><%= link_to "Log Out", log_out_path, method: :delete %></li>
