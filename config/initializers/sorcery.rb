@@ -118,8 +118,8 @@ Rails.application.config.sorcery.configure do |config|
     config.facebook.key = ENV["SORCERY_FACEBOOK_KEY"]
     config.facebook.secret = ENV["SORCERY_FACEBOOK_SECRET"]
     config.facebook.callback_url = ENV["SORCERY_FACEBOOK_CALLBACK_URL"]
-    config.facebook.user_info_mapping = { email: "email" }
-    config.facebook.access_permissions = ["email"]
+    config.facebook.user_info_mapping = { email: "email", name: "name" }
+    config.facebook.access_permissions = ["email", "public_profile"]
     config.facebook.display = "page"
     # config.facebook.api_version = "v2.4"
   #
@@ -178,7 +178,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `[:email]`
     #
 
-      user.username_attribute_names = [:email]
+      user.username_attribute_names = :email
 
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
@@ -190,13 +190,13 @@ Rails.application.config.sorcery.configure do |config|
     # downcase the username before trying to authenticate, default is false
     # Default: `false`
     #
-    # user.downcase_username_before_authenticating =
+     # user.downcase_username_before_authenticating =
 
 
     # change default email attribute.
     # Default: `:email`
     #
-    # user.email_attribute_name =
+     # user.email_attribute_name = [:email]
 
 
     # change default crypted_password attribute.

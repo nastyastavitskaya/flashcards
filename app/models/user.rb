@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   validates :password_confirmation, presence: true, if: -> { new_record? || changes["password"] }
 
-  validates :email, uniqueness: true,
-                    email_format: { message: "has invalid format" }
+  validates :email, uniqueness: true
+                    # email_format: { message: "has invalid format" }
 
 
   # before_save :downcase_email
