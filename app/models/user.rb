@@ -20,12 +20,12 @@ class User < ActiveRecord::Base
                     email_format: { message: "has invalid format" }
 
 
-  before_save :downcase_email
+  # before_save :downcase_email
 
 
-  def downcase_email
-    self.email = email.downcase
-  end
+  # def downcase_email
+  #   self.email = email.downcase
+  # end
 
   def pending_cards
     if current_category
