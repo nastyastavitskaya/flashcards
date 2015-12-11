@@ -6,8 +6,8 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
+    @user = User.create!(user_params)
+    if @user.errors.empty?
       login(params[:user][:email], params[:user][:password])
       flash[:success] = "Welcome!"
       redirect_to root_path
