@@ -113,12 +113,12 @@ Rails.application.config.sorcery.configure do |config|
     config.twitter.key = ENV["SORCERY_TWIITER_KEY"]
     config.twitter.secret = ENV["SORCERY_TWIITER_SECRET"]
     config.twitter.callback_url = ENV["SORCERY_TWIITER_CALLBACK_URL"]
-    config.twitter.user_info_mapping = { email: "screen_name" }
+    config.twitter.user_info_mapping = { email: "screen_name", name: "screen_name" }
   #
     config.facebook.key = ENV["SORCERY_FACEBOOK_KEY"]
     config.facebook.secret = ENV["SORCERY_FACEBOOK_SECRET"]
     config.facebook.callback_url = ENV["SORCERY_FACEBOOK_CALLBACK_URL"]
-    config.facebook.user_info_mapping = { email: "email", name: "name" }
+    config.facebook.user_info_mapping = { email: "name", name: "name" }
     config.facebook.access_permissions = ["email", "public_profile"]
     config.facebook.display = "page"
     # config.facebook.api_version = "v2.4"
