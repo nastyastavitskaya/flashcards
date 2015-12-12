@@ -17,9 +17,9 @@ class OauthsController < ApplicationController
         auto_login(@user)
         redirect_to root_path
         flash[:success] = "Logged in from #{provider.titleize}!"
-      # rescue
-      #   flash[:danger] = "Failed to login from #{provider.titleize}!"
-      #   redirect_to log_in_path
+      rescue
+        flash[:danger] = "Failed to login from #{provider.titleize}!"
+        redirect_to log_in_path
       end
     end
   end
