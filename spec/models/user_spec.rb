@@ -20,14 +20,6 @@ describe User do
   end
 
 
-  describe "#downcase_email" do
-    it "makes the email attributes lower case" do
-      user = User.create(email: "USER@EXAMPLE.COM")
-      expect{ user.downcase_email}.to change{ user.email }.
-      from("USER@EXAMPLE.COM").to("user@example.com")
-    end
-  end
-
   describe "user password" do
     it "is not valid without a password" do
       user = User.new password: nil, password_confirmation: nil
