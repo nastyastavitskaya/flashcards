@@ -8,8 +8,11 @@ class ReviewsController < ApplicationController
 
   def create
     @card = Card.find(review_params[:card_id])
-    if @card.check_translation(review_params[:user_translated_text])
+    @result = @card.check_translation(review_params[:user_translated_text])
+    if @result == :true
       flash[:success] = "Правильно!"
+    elsif @result == :typo
+      flash[:warning] = "Будь внимательнее!"
     else
       flash[:danger] = "Неправильно!"
     end
