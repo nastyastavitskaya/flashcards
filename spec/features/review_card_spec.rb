@@ -13,8 +13,8 @@ describe "Cards to review" do
   context "#no cards" do
     before(:each) do
       click_link "New Card"
-      card = create(:card)
-      Timecop.freeze(Date.today - 5.days)
+      @card = create(:card)
+      Timecop.freeze(@card.review_date)
       visit root_path
       click_link "Перейти к тренировщику"
       visit reviews_path
@@ -31,20 +31,26 @@ describe "Cards to review" do
       click_link "New Category"
       @category = create(:category, user_id: @user.id)
       @card = create(:card, category_id: @category.id)
-      Timecop.freeze(Date.today + 5.days)
+      Timecop.freeze(@card.review_date)
       visit root_path
       click_link "Перейти к тренировщику"
       visit reviews_path
     end
 
     it "input wrong translation" do
-      fill_in "Введите перевод:", with: "doggg"
+      fill_in "Введите перевод:", with: "cat"
       click_button "Проверить"
       expect(page).to have_content "Неправильно!"
     end
 
+    it "input typo" do
+      fill_in "Введите перевод:", with: "dogg"
+      click_button "Проверить"
+      expect(page).to have_content "Будь внимательнее!"
+    end
+
     it "input right translation" do
-      fill_in "Введите перевод:", with: "Dog"
+      fill_in "Введите перевод:", with: "dog"
       click_button "Проверить"
       expect(page).to have_content "Правильно!"
     end

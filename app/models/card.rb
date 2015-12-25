@@ -5,13 +5,13 @@ class Card < ActiveRecord::Base
 
   validate :same_texts
 
-  before_save :set_default_review_date, on: :create
+  before_create :set_default_review_date
 
   belongs_to :category
 
   mount_uploader :image, ImageUploader
 
-  scope :to_review, -> { where("review_date <= ?", Date.today).order('RANDOM()') }
+  scope :to_review, -> { where("review_date <= ?", Time.current).order('RANDOM()') }
 
   def self.create_with_category(params)
     category_params = params.delete(:category)
@@ -24,8 +24,6 @@ class Card < ActiveRecord::Base
 
 
   def check_translation(user_translated_text)
-    # if sanitize_word(translated_text) == sanitize_word(user_translated_text)
-
     case Levenshtein.distance(user_translated_text, translated_text)
     when 0
       correct_answers
@@ -47,34 +45,36 @@ class Card < ActiveRecord::Base
   def incorrect_answers
     decrement(:num_of_correct_answers) if num_of_correct_answers > 0
     increment(:num_of_incorrect_answers) if num_of_incorrect_answers < 3
-    update_review_date
+    if num_of_incorrect_answers >= 3
+      update_attributes(num_of_correct_answers: 0, review_date: review_date + 12.hours)
+    end
   end
 
   def update_review_date
-    num_of_review =  case num_of_correct_answers
+    review_number = case num_of_correct_answers
       when 0
         0
       when 1
-        12.hour
+        12.hours
       when 2
-        3.day
+        3.days
       when 3
-        7.day
+        7.days
       when 4
-        14.day
+        14.days
       else
         1.month
       end
-    update_attributes(review_date: review_date + num_of_review)
+    update_attributes(review_date: review_date + review_number)
   end
+
 
 
   private
 
   def set_default_review_date
-    self.review_date = DateTime.current
+    self.review_date = Time.current
   end
-
 
   def same_texts
     if sanitize_word(original_text) == sanitize_word(translated_text)

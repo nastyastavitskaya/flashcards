@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   def pending_cards
     if current_category
-      current_category.cards.order('RANDOM()')
+      current_category.cards.to_review.order('RANDOM()')
     else
       cards.to_review
     end
