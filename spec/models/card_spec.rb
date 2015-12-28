@@ -24,7 +24,7 @@ describe Card do
 
   context "#check_translation" do
     it "right translation" do
-      expect(@card.check_translation("dog")).to be :true
+      expect(@card.check_translation("dog")).to be :correct
       expect(@card.num_of_correct_answers).to eq(1)
       expect(@card.num_of_incorrect_answers).to eq(0)
     end
@@ -33,7 +33,7 @@ describe Card do
       expect(@card.check_translation("djg")).to be :typo
     end
     it "wrong translation" do
-      expect(@card.check_translation("cat")).to be :false
+      expect(@card.check_translation("cat")).to be :wrong
       expect(@card.num_of_correct_answers).to eq(0)
       expect(@card.num_of_incorrect_answers).to eq(1)
     end
@@ -45,7 +45,7 @@ describe Card do
       Timecop.freeze(@card.review_date)
     end
     it "1st correct answer" do
-      expect(@card.check_translation("dog")).to be :true
+      expect(@card.check_translation("dog")).to be :correct
       expect(@card.num_of_correct_answers).to eq(1)
       expect(@card.review_date).to eq(Time.current + 12.hours)
     end
@@ -57,7 +57,7 @@ describe Card do
       Timecop.freeze(@card.review_date)
     end
     it "3d correct answer" do
-      expect(@card.check_translation("dog")).to be :true
+      expect(@card.check_translation("dog")).to be :correct
       expect(@card.num_of_correct_answers).to eq(3)
       expect(@card.review_date).to eq(Time.current + 7.days)
     end
@@ -70,7 +70,7 @@ describe Card do
     end
 
     it "wrong answer" do
-      expect(@card.check_translation("cat")).to be :false
+      expect(@card.check_translation("cat")).to be :wrong
       expect(@card.num_of_correct_answers).to eq(0)
       expect(@card.num_of_incorrect_answers).to eq(3)
       expect(@card.review_date).to eq(Time.current + 12.hours)

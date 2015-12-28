@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
   def create
     @card = current_user.cards.find(review_params[:card_id])
     @result = @card.check_translation(review_params[:user_translated_text])
-    if @result == :true
+    if @result == :correct
       flash[:success] = "Правильно!" \
                          " Дата следующей проверки: #{@card.review_date.strftime('%b %-d, %Y %H:%M')}"
 

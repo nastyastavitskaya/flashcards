@@ -24,25 +24,25 @@ class Card < ActiveRecord::Base
 
 
   def check_translation(user_translated_text)
-    case Levenshtein.distance(user_translated_text, translated_text)
+    @result = case Levenshtein.distance(user_translated_text, translated_text)
     when 0
-      correct_answers
-      @result = :true
+      update_num_of_correct_answers
+      :correct
     when 1, 2
-      @result = :typo
+      :typo
     else
-      incorrect_answers
-      @result = :false
+      update_num_of_incorrect_answers
+      :wrong
      end
   end
 
-  def correct_answers
+  def update_num_of_correct_answers
     update_attributes(num_of_incorrect_answers: 0)
     increment(:num_of_correct_answers) if num_of_correct_answers < 5
     update_review_date
   end
 
-  def incorrect_answers
+  def update_num_of_incorrect_answers
     decrement(:num_of_correct_answers) if num_of_correct_answers > 0
     increment(:num_of_incorrect_answers) if num_of_incorrect_answers < 3
     if num_of_incorrect_answers >= 3
