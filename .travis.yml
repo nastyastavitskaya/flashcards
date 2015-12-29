@@ -5,8 +5,11 @@ rvm:
 env:
   - DB=postgresql
 script:
-  - bundle exec rspec spec
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database card_db_test;' -U postgres
+
 
