@@ -7,7 +7,6 @@ describe Card do
 
   context "#set_default_review_date" do
     before do
-      @card = create(:card)
       Timecop.freeze(@card.review_date)
     end
     it "set review date correct" do
@@ -41,7 +40,6 @@ describe Card do
 
   context "#update_review_date" do
     before do
-      @card = create(:card)
       Timecop.freeze(@card.review_date)
     end
     it "1st correct answer" do
