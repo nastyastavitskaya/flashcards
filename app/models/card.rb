@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
 
-  Interval = [0, 1, 2, 3, 4]
+  INTERVAL = [0, 1, 2, 3, 4]
 
   validates :original_text,
             :translated_text, presence: true
@@ -55,15 +55,15 @@ class Card < ActiveRecord::Base
 
   def update_review_date
     review_number = case num_of_correct_answers
-      when Interval[0]
+      when INTERVAL[0]
         0
-      when Interval[1]
+      when INTERVAL[1]
         12.hours
-      when Interval[2]
+      when INTERVAL[2]
         3.days
-      when Interval[3]
+      when INTERVAL[3]
         7.days
-      when Interval[4]
+      when INTERVAL[4]
         14.days
       else
         1.month
