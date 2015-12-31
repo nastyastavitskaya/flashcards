@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
 
-  INTERVAL = [0, 1, 2, 3, 4]
+  INTERVAL = [0, 12.hours, 3.days, 7.days, 14.days]
 
   validates :original_text,
             :translated_text, presence: true
@@ -29,23 +29,23 @@ class Card < ActiveRecord::Base
   def check_translation(user_translated_text)
     @result = case Levenshtein.distance(user_translated_text, translated_text)
     when 0
-      update_num_of_correct_answers
+      update_number_of_correct_answers
       :correct
     when 1, 2
       :typo
     else
-      update_num_of_incorrect_answers
+      update_number_of_incorrect_answers
       :wrong
      end
   end
 
-  def update_num_of_correct_answers
+  def update_number_of_correct_answers
     update_attributes(num_of_incorrect_answers: 0)
     increment(:num_of_correct_answers) if num_of_correct_answers < 5
     update_review_date
   end
 
-  def update_num_of_incorrect_answers
+  def update_number_of_incorrect_answers
     decrement(:num_of_correct_answers) if num_of_correct_answers > 0
     increment(:num_of_incorrect_answers) if num_of_incorrect_answers < 3
     if num_of_incorrect_answers >= 3
@@ -55,16 +55,16 @@ class Card < ActiveRecord::Base
 
   def update_review_date
     review_number = case num_of_correct_answers
-      when INTERVAL[0]
-        0
-      when INTERVAL[1]
-        12.hours
-      when INTERVAL[2]
-        3.days
-      when INTERVAL[3]
-        7.days
-      when INTERVAL[4]
-        14.days
+      when 0
+        INTERVAL[0]
+      when 1
+        INTERVAL[1]
+      when 2
+        INTERVAL[2]
+      when 3
+        INTERVAL[3]
+      when 4
+        INTERVAL[4]
       else
         1.month
       end
