@@ -56,15 +56,15 @@ class Card < ActiveRecord::Base
   def update_review_date
     review_number = case num_of_correct_answers
       when 0
-        INTERVAL[0]
+        INTERVAL[num_of_correct_answers]
       when 1
-        INTERVAL[1]
+        INTERVAL[num_of_correct_answers]
       when 2
-        INTERVAL[2]
+        INTERVAL[num_of_correct_answers]
       when 3
-        INTERVAL[3]
+        INTERVAL[num_of_correct_answers]
       when 4
-        INTERVAL[4]
+        INTERVAL[num_of_correct_answers]
       else
         1.month
       end
