@@ -17,7 +17,7 @@
       </tr>
       <tr>
         <th>Review Date:</th>
-          <td><%= card.review_date.strftime('%d/%m/%Y') %></td>
+          <td><%= card.review_date.strftime('%b %-d, %Y %H:%M') %></td>
           <td><%= link_to 'Show', category_card_path(@category, card) %></td>
           <td><%= link_to 'Edit', edit_category_card_path(@category, card) %></td>
           <td><%= link_to 'Destroy', category_card_path(@category, card), method: :delete, data: { confirm: 'Are you sure?'} %></td>

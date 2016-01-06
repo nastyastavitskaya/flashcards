@@ -13,7 +13,7 @@
 
 <p>
   <strong>Review Date:</strong>
-  <%= @card.review_date.strftime('%d/%m/%Y') %>
+  <%= @card.review_date.strftime('%b %-d, %Y %H:%M') %>
 </p>
 
 <h6><%= link_to 'Back', category_cards_path %></h6>

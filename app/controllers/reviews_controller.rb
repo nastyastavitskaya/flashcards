@@ -7,11 +7,17 @@ class ReviewsController < ApplicationController
 
 
   def create
-    @card = Card.find(review_params[:card_id])
-    if @card.check_translation(review_params[:user_translated_text])
-      flash[:success] = "Правильно!"
+    @card = current_user.cards.find(review_params[:card_id])
+    @result = @card.check_translation(review_params[:user_translated_text])
+    if @result == :correct
+      flash[:success] = "Правильно!" \
+                         " Дата следующей проверки: #{@card.review_date.strftime('%b %-d, %Y %H:%M')}"
+
+    elsif @result == :typo
+      flash[:warning] = "Будь внимательнее!"
     else
-      flash[:danger] = "Неправильно!"
+      flash[:danger] = "Неправильно!"\
+                        "Дата следующей проверки: #{@card.review_date.strftime('%b %-d, %Y %H:%M')}"
     end
     redirect_to reviews_path
   end

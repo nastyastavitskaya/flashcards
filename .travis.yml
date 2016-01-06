@@ -1,12 +1,14 @@
 language: ruby
 
 rvm:
-  - 2.2.1
+  - 2.2.3
 env:
   - DB=postgresql
 script:
-  - bundle exec rspec spec
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database card_db_test;' -U postgres
+
 

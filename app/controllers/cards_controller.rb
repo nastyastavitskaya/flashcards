@@ -54,10 +54,6 @@ class CardsController < ApplicationController
     @card = @category.cards.find(params[:id])
   end
 
-  def not_authenticated
-    flash[:danger] = "Please log in first!"
-    redirect_to log_in_path
-  end
 
   def card_params
     params.require(:card).permit(:original_text, :translated_text, :review_date, :image, :category_id, category: [:name]).deep_merge(category: {user_id: current_user.id})
