@@ -55,6 +55,7 @@ class Card < ActiveRecord::Base
 
   def update_review_date
     review_number = INTERVAL[num_of_correct_answers]
+    review_number = INTERVAL[5] if num_of_correct_answers > 5
     update_attributes(review_date: review_date + review_number)
   end
 
