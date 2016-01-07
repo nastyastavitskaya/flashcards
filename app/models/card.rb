@@ -36,7 +36,7 @@ class Card < ActiveRecord::Base
     else
       update_number_of_incorrect_answers
       :wrong
-     end
+    end
   end
 
   def update_number_of_correct_answers
