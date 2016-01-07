@@ -11,12 +11,15 @@ class ReviewsController < ApplicationController
     @result = @card.check_translation(review_params[:user_translated_text])
     if @result == :correct
       flash[:success] = "Правильно!" \
-                         " Дата следующей проверки: #{@card.review_date.strftime('%b %-d, %Y %H:%M')}"
+                         " Правильный ответ: #{@card.translated_text}, твой перевод: #{review_params[:user_translated_text]}"
+                         "Дата следующей проверки: #{@card.review_date.strftime('%b %-d, %Y %H:%M')}"
 
     elsif @result == :typo
-      flash[:warning] = "Будь внимательнее!"
+      flash[:warning] = "Будь внимательнее!"\
+                        " Правильный ответ: #{@card.translated_text}, твой перевод: #{review_params[:user_translated_text]}"
     else
       flash[:danger] = "Неправильно!"\
+                        " Правильный ответ: #{@card.translated_text}, твой перевод: #{review_params[:user_translated_text]}"
                         "Дата следующей проверки: #{@card.review_date.strftime('%b %-d, %Y %H:%M')}"
     end
     redirect_to reviews_path
