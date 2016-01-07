@@ -28,15 +28,15 @@ class Card < ActiveRecord::Base
 
   def check_translation(user_translated_text)
     @result = case Levenshtein.distance(user_translated_text, translated_text)
-    when 0
-      update_number_of_correct_answers
-      :correct
-    when 1, 2
-      :typo
-    else
-      update_number_of_incorrect_answers
-      :wrong
-    end
+              when 0
+                update_number_of_correct_answers
+                :correct
+              when 1, 2
+                :typo
+              else
+                update_number_of_incorrect_answers
+                :wrong
+              end
   end
 
   def update_number_of_correct_answers
