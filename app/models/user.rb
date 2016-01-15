@@ -26,4 +26,13 @@ class User < ActiveRecord::Base
       cards.to_review
     end
   end
+
+  def self.notify_pending_cards
+    users = User.where.not(email: nil)
+    users.each do |user|
+      if user.pending_cards.any?
+        CardsMailer.pending_cards_notification(user).deliver_later
+      end
+    end
+  end
 end

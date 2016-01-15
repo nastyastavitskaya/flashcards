@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  </head>
+  <body>
+    <h1>Привет, <%= @user.name %></h1>
+    <p>
+      У тебя есть карточки, которые пора повторить.
+    </p>
+    <p>
+      Для тренировки карточек, пройди по ссылке: <%= link_to 'Перейти к тренировщику', reviews_url %>
+  </body>
+</html>
