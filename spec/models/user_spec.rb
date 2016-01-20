@@ -49,7 +49,6 @@ describe User do
   end
 
   describe "notify user" do
-
     it "sends an email" do
       email_user = User.create(
         name: "Tim",
@@ -71,9 +70,4 @@ describe User do
       expect { User.notify_pending_cards }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
-
 end
-
-
-
-
