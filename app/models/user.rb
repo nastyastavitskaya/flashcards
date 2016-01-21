@@ -28,11 +28,9 @@ class User < ActiveRecord::Base
   end
 
   def self.notify_pending_cards
-    users = User.where.not(email: nil)
-    users.each do |user|
-      if user.pending_cards.any?
-        CardsMailer.pending_cards_notification(user).deliver_later
-      end
+  users = User.includes(:cards).where("cards.review_date <= ?", Time.now).references(:cards)
+  users.each do |user|
+      CardsMailer.pending_cards_notification(user).deliver_later
     end
   end
 end
