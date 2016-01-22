@@ -40,7 +40,7 @@ describe "Cards to review" do
     it "input wrong translation" do
       fill_in "Введите перевод:", with: "cat"
       click_button "Проверить"
-      expect(page).to have_content "Неправильно!"
+      expect(page).to have_content "Нет!"
     end
 
     it "input typo" do
@@ -52,7 +52,7 @@ describe "Cards to review" do
     it "input right translation" do
       fill_in "Введите перевод:", with: "dog"
       click_button "Проверить"
-      expect(page).to have_content "Правильно!"
+      expect(page).to have_content "Да!"
     end
   end
 

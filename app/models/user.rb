@@ -26,4 +26,11 @@ class User < ActiveRecord::Base
       cards.to_review
     end
   end
+
+  def self.notify_pending_cards
+    users = User.includes(:cards).where("cards.review_date <= ?", Time.now).references(:cards)
+    users.each do |user|
+      CardsMailer.pending_cards_notification(user).deliver_later
+    end
+  end
 end

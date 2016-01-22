@@ -59,7 +59,6 @@ class Card < ActiveRecord::Base
   end
 
 
-
   private
 
   def set_default_review_date

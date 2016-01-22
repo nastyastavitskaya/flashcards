@@ -46,6 +46,9 @@ gem 'rails_12factor', group: :production
 # Levenshtein distance
 gem 'levenshtein-ffi', require: 'levenshtein'
 
+# Clean ruby syntax for writing and deploying cron jobs
+gem 'whenever', require: false
+
 
 group :development, :test do
   gem 'rspec-rails'
