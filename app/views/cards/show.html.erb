@@ -2,18 +2,18 @@
   <p><%= image_tag(@card.image_url) %></p>
 </p>
 <p>
-  <strong>Original Text:</strong>
+  <strong><%= t('card.original_text') %></strong>
   <%= @card.original_text %>
 </p>
 
 <p>
-  <strong>Translated Text:</strong>
+  <strong><%= t('card.translated_text') %></strong>
   <%= @card.translated_text %>
 </p>
 
 <p>
-  <strong>Review Date:</strong>
-  <%= @card.review_date.strftime('%b %-d, %Y %H:%M') %>
+  <strong><%= t('card.review_date') %></strong>
+  <%= @card.review_date.strftime('%m/%d/%Y, %H:%M') %>
 </p>
 
-<h6><%= link_to 'Back', category_cards_path %></h6>
+<h6><%= link_to t('footer'), category_cards_path %></h6>

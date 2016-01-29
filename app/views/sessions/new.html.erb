@@ -1,30 +1,30 @@
-<h1>Log In</h1>
+<h1><%= t("header.login") %></h1>
 
 <%= form_tag sessions_path, method: :post do %>
  <div class="field">
-  <%= label_tag :email %><br />
+  <%= label_tag t("user.registration.email") %><br />
   <%= text_field_tag :email %>
  </div>
  <div class="field">
-  <%= label_tag :password %><br />
+  <%= label_tag t("user.registration.password") %><br />
   <%= password_field_tag :password %>
  </div>
 
- <p><%= submit_tag 'Log in', class: 'btn btn-primary btn-lg' %></p>
+ <p><%= submit_tag t("header.login"), class: 'btn btn-primary btn-lg' %></p>
 
   <%= link_to auth_at_provider_path(provider: :facebook) do %>
     <button class="btn btn-facebook">
-    <i class="fa fa-facebook"></i> | Log in with Facebook</button>
+    <i class="fa fa-facebook"></i><%= t("user.session.login_facebook") %></button>
   <% end %>
   <%= link_to auth_at_provider_path(provider: :twitter) do %>
     <button class="btn btn-twitter">
-    <i class="fa fa-twitter"></i> | Log in with Twitter</button>
+    <i class="fa fa-twitter"></i><%= t("user.session.login_twitter") %></button>
   <% end %>
   <div class="form-group">
     <%= check_box_tag :remember_me %>
-    <%= label_tag :remember_me %>
+    <%= label_tag t("user.session.check_box") %>
   </div>
 <% end %>
 
-<p>New user? <%= link_to "Sign up now!", sign_up_path %></p>
+<p><%= t("user.session.new_user") %><%= link_to t("user.session.sign_up_now"), sign_up_path %></p>
 

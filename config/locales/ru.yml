@@ -1,0 +1,141 @@
+ru:
+  header:
+    flashcard: 'Флэшкарточкер'
+    card_new: 'Новая карточка'
+    category_new: 'Новая категория'
+    categories_all: 'Категории'
+    edit_profile: 'Редактировать профиль'
+    log_out: 'Выйти'
+    sign_up: 'Регистрация'
+    login: 'Войти'
+    languages:
+      lang: 'Язык'
+      en: 'Английский'
+      ru: 'Русский'
+
+  main_page:
+    index: 'Первый в мире удобный менеджер флеш-карточек. Именно так.'
+    trainer: 'Перейти к тренировщику'
+
+  footer: 'Назад'
+
+  shared:
+    error_message: 'Пользователь не может быть сохранен:'
+
+  user:
+    registration:
+      title: 'Регистрация'
+      name: 'Имя'
+      email: 'Email'
+      password: 'Пароль'
+      password_confirmation: 'Подтвердить пароль'
+      language: 'Выберите язык'
+      submit: 'Зарегистрироваться'
+      flash: 'Добро пожаловать!'
+    profile:
+      title: 'Редактировать профиль'
+      submit: 'Сохранить изменения'
+      update_flash: 'Профиль обновлен'
+      set_category_success: "Выбрана категория: %{category}"
+      set_category_fail: 'Ошибка!'
+    session:
+      login_facebook: '| Войти через Facebook'
+      login_twitter: '| Войти через Twitter'
+      check_box: 'Запомнить меня'
+      new_user: 'Еще не стал пользователем?'
+      sign_up_now: ' Зарегистрируйся!'
+      welcome_flash: 'Добро пожаловать!'
+      error_flash: 'Введен неверный email и/или пароль.'
+      logout_flash: 'До встречи!'
+    not_authenticated: 'Пожалуйста, авторизуйтесь!'
+    authenticated_with_provider_success: "Совершен вход через %{provider}!"
+    authenticated_with_provider_fail: "Не удалось войти через %{provider}!"
+
+  category:
+    index:
+      title: 'Категории'
+      activate: 'Выбрать текущей'
+      edit: 'Редактировать'
+      destroy: 'Удалить'
+      confirm: 'Вы уверены?'
+    new_title: 'Новая категория:'
+    edit_title: 'Редактировать категорию'
+    name: 'Название'
+    name_placeholder: 'Введите название'
+    submit: 'Создать'
+    controller:
+      create_success: 'Добавлена новая категория!'
+      create_fail: 'Ошибка!'
+      update: 'Категория была успешно обновлена'
+      destroy: 'Категория %{category} была удалена!'
+
+  card:
+    original_text: 'Оригинальный текст:'
+    translated_text: 'Перевод:'
+    review_date: 'Дата проверки:'
+    image: 'Изображение'
+    error: "Оригинальный текст и перевод не могут быть одинаковыми!"
+    index:
+      link_show: 'Просмотр'
+      link_edit: 'Редактировать'
+      link_destroy: 'Удалить'
+      confirm: 'Вы уверены?'
+    form:
+      original_text_placeholder: 'Введите слово для перевода'
+      translated_text_placeholder: 'Введите перевод'
+      category: 'Категория'
+      prompt: 'Выберите категорию'
+      create_category: 'Или создайте новую:'
+      submit: 'Сохранить'
+    new_title: 'Новая карточка'
+    edit_title: 'Редактировать карточку'
+    review:
+      title: 'Карточки для проверки'
+      selected_category: 'Выбранная категория:'
+      user_translation: 'Введите перевод:'
+      submit: 'Проверить'
+      no_cards: 'Новых карточек для проверки нет!'
+    controller:
+      create_success: 'Карта создана'
+      create_fail: 'При создании карты возникли проблемы'
+      update_success: 'Карта сохранена'
+      update_fail: 'Эта карта не может быть сохранена'
+      destroy: 'Карта удалена'
+      review_success: "Да! Правильный ответ: %{card}, твой перевод: %{review_params}. Дата следующей проверки: %{review_date}"
+      review_typo: "Будь внимательнее! Правильный ответ: %{card}, твой перевод: %{review_params}."
+      review_fail: "Нет! Правильный ответ: %{card}, твой перевод: %{review_params}. Дата следующей проверки: %{review_date}"
+    mailer:
+      subject: "Новые карточки для проверки!"
+
+  activerecord:
+    attributes:
+      user:
+        name: 'Имя'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+    errors:
+      models:
+        card:
+          attributes:
+            original_text:
+              blank: 'Оригинальный текст обязателен'
+            translated_text:
+              blank: 'Перевод обязателен'
+        category:
+          attributes:
+            name:
+              blank: 'Название категории обязательно'
+        user:
+          attributes:
+            name:
+              blank: 'обязательно'
+              too_short: 'слишком короткое(минимум 3 символа)'
+            password:
+              too_short: 'слишком короткий(минимум 3 символа)'
+            password_confirmation:
+              blank: 'обязательно'
+
+
+
+
+

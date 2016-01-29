@@ -20,4 +20,110 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  header:
+    flashcard: 'Flashcards'
+    card_new: 'New Card'
+    category_new: 'New Category'
+    categories_all: 'Categories'
+    edit_profile: 'Edit Profile'
+    log_out: 'Log Out'
+    sign_up: 'Sign Up'
+    login: 'Log In'
+    languages:
+      lang: 'Language'
+      en: 'English'
+      ru: 'Russian'
+
+  main_page:
+    index: 'First ever flashcards application that is easy to use.'
+    trainer: 'Trainig'
+
+  footer: 'Back'
+
+  shared:
+    error_message: 'Errors prohibited this user from being saved:'
+
+  user:
+    registration:
+      title: 'Registration'
+      name: 'Name'
+      email: 'Email'
+      password: 'Password'
+      password_confirmation: 'Confirm password'
+      language: 'Choose your language'
+      submit: 'Register'
+      flash: 'Welcome!'
+    profile:
+      title: 'Update your profile'
+      submit: 'Save changes'
+      update_flash: 'Profile updated'
+      set_category_success: "Selected category: %{category}"
+      set_category_fail: 'Error!'
+    session:
+      login_facebook: '| Log in with Facebook'
+      login_twitter: '| Log in with Twitter'
+      check_box: 'Remember me'
+      new_user: 'New user?'
+      sign_up_now: ' Sign up now!'
+      welcome_flash: 'Welcome back!'
+      error_flash: 'Email and/or password is invalid.'
+      logout_flash: 'See you!'
+    not_authenticated: 'Please log in first!'
+    authenticated_with_provider_success: "Logged in from %{provider}!"
+    authenticated_with_provider_fail: "Failed to login from %{provider}!"
+
+  category:
+    index:
+      title: 'Categories'
+      activate: 'Activate'
+      edit: 'Edit'
+      destroy: 'Destroy'
+      confirm: 'Are you sure?'
+    new_title: 'New category:'
+    edit_title: 'Edit category'
+    name: 'Name'
+    name_placeholder: 'Enter name'
+    submit: 'Create'
+    controller:
+      create_success: 'Added new category!'
+      create_fail: 'Error!'
+      update: 'Successfully updated category'
+      destroy: 'Category %{category} deleted!'
+
+  card:
+    original_text: 'Original Text:'
+    translated_text: 'Translated Text:'
+    review_date: 'Review Date:'
+    image: 'Image'
+    error: "Original and translated text can't be same!"
+    index:
+      link_show: 'Show'
+      link_edit: 'Edit'
+      link_destroy: 'Delete'
+      confirm: 'Are you sure?'
+    form:
+      original_text_placeholder: 'Enter original text'
+      translated_text_placeholder: 'Enter translated text'
+      category: 'Category'
+      prompt: 'Choose existing category'
+      create_category: 'Or create new category:'
+      submit: 'Save'
+    new_title: 'New card'
+    edit_title: 'Edit card'
+    review:
+      title: 'Card to Review'
+      selected_category: 'Selected category:'
+      user_translation: 'Your translation:'
+      submit: 'Check'
+      no_cards: 'No new card to review!'
+    controller:
+      create_success: 'Added card'
+      create_fail: 'There was a problem adding that card'
+      update_success: 'Saved card'
+      update_fail: 'That card could not be saved'
+      destroy: 'Card deleted'
+      review_success: "Yes! Right translation: %{card}, your translation: %{review_params}. Next review date: %{review_date}"
+      review_typo: "Watch out! Right translation: %{card}, your translation: %{review_params}."
+      review_fail: "No :( Right translation: %{card}, your translation: %{review_params}. Next review date: %{review_date}"
+    mailer:
+      subject: "You have new cards to review!"

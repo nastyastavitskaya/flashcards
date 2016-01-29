@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(params[:user][:email], params[:user][:password])
-      flash[:success] = "Welcome!"
+      flash[:success] = t("user.registration.flash")
       redirect_to root_path
     else
       render "new"

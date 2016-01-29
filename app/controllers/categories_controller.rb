@@ -1,6 +1,5 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :require_login
 
   def index
     @categories = current_user.categories.order("name")
@@ -17,10 +16,10 @@ class CategoriesController < ApplicationController
   def create
     @category = current_user.categories.new(category_params)
     if @category.save
-      flash[:success] = "Added new category!"
+      flash[:success] = t("category.controller.create_success")
       redirect_to categories_path
     else
-      flash[:danger] = "Error!"
+      flash[:danger] = t("category.controller.create_fail")
       render "new"
     end
   end
@@ -28,7 +27,7 @@ class CategoriesController < ApplicationController
   def update
     if @category.update(category_params)
       redirect_to categories_path
-      flash[:success] = "Successfully updated category"
+      flash[:success] = t("category.controller.update")
     else
       render "edit"
     end
@@ -36,7 +35,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    flash[:danger] = "Category #{@category.name} deleted!"
+    flash[:danger] = t("category.controller.destroy", category: @category.name)
     redirect_to categories_path
   end
 
@@ -49,10 +48,5 @@ private
 
   def category_params
     params.require(:category).permit(:name)
-  end
-
-  def not_authenticated
-    flash[:danger] = "Please log in first!"
-    redirect_to log_in_path
   end
 end

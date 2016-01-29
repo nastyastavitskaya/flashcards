@@ -1,6 +1,6 @@
 <%= simple_form_for @category do |f| %>
-  <%= f.input :name, placeholder: 'Enter name' %>
+  <%= f.input :name, label: t('category.name'), placeholder: t('category.name_placeholder') %>
 
- <%= f.button :submit, class: "btn btn-success" %>
+ <%= f.button :submit, t('category.submit'), class: 'btn btn-success' %>
 <% end %>
 

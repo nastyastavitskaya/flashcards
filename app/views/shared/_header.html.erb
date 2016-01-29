@@ -1,26 +1,46 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to "Flashcards", root_path, id: "logo" %>
+      <%= link_to t("header.flashcard"), root_path, id: "logo" %>
     </div>
+
+
     <ul class="nav pull-right">
-      <li><%= link_to 'New Card', new_card_path %></li>
-      <li><%= link_to 'New Category', new_category_path %></li>
-      <li><%= link_to 'Categories', categories_path %></li>
+      <li><%= link_to t("header.card_new"), new_card_path %></li>
+      <li><%= link_to t("header.category_new"), new_category_path %></li>
+      <li><%= link_to t("header.categories_all"), categories_path %></li>
     </ul>
+
     <ul class="nav pull-left">
     <% if current_user %>
-      <li class="disabled">
-        <%= link_to current_user.name || current_user.email %></li>
-      <li><%= link_to "Edit Profile", edit_profile_path(current_user) %>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <%= current_user.name || current_user.email %>
+        <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to t("header.edit_profile"), edit_profile_path(current_user) %></li>
+          <li><%= link_to t("header.log_out"), log_out_path, method: :delete %></li>
+        </ul>
       </li>
-      <li><%= link_to "Log Out", log_out_path, method: :delete %></li>
-    </ul>
     <% else %>
     <ul class="nav pull-left">
-      <p><%= link_to "Sign Up", sign_up_path, class: "btn btn-primary" %>
-      <%= link_to "Log in", log_in_path, class: "btn btn-success" %></p>
-    <% end %>
+      <p><%= link_to t("header.sign_up"), sign_up_path, class: "btn btn-primary" %>
+      <%= link_to t("header.login"), log_in_path, class: "btn btn-success" %></p>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <%= t('header.languages.lang') %>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to t('header.languages.en'), root_path(locale: :en) %></li>
+            <li><%= link_to t('header.languages.ru'), root_path(locale: :ru) %></li>
+          </ul>
+        </li>
+      </ul>
+    <% end %>
+  </div>
 </nav>
 

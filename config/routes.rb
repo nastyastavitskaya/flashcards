@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
   root 'flashcards#index'
+  # get '/change_locale/:locale', to: 'application#change_locale', as: :change_locale
 
   resources :cards, only: [:new, :create]
   post "/cards/new" => "cards#create"
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     post "oauth/callback" => "oauths#callback"
     get "oauth/callback" => "oauths#callback"
     get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
+
 
 
   # Example resource route with options:

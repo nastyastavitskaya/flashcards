@@ -1,23 +1,16 @@
-<h1>Registration</h1>
+<h1><%= t("user.registration.title") %></h1>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
+    <%= simple_form_for(@user) do |f| %>
       <%= render 'shared/error_messages' %>
       <%= f.hidden_field :user_id, value: @user.id %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.input :name, label: t("user.registration.name") %>
+      <%= f.input :email, label: t("user.registration.email") %>
+      <%= f.input :password, label: t("user.registration.password") %>
+      <%= f.input :password_confirmation, label: t("user.registration.password_confirmation") %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation %>
-
-      <p><%= f.submit "Register", class: "btn" %></p>
+      <p><%= f.submit t("user.registration.submit"), class: "btn btn-success" %></p>
     <% end %>
   </div>
 </div>
