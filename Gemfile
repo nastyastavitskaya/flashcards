@@ -49,6 +49,9 @@ gem 'levenshtein-ffi', require: 'levenshtein'
 # Clean ruby syntax for writing and deploying cron jobs
 gem 'whenever', require: false
 
+# Find out which locale the user preferes by reading the languages they specified in their browser
+gem 'http_accept_language'
+
 
 group :development, :test do
   gem 'rspec-rails'

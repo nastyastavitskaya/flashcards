@@ -6,17 +6,17 @@ class SessionsController < ApplicationController
 
   def create
     if login(params[:email], params[:password], params[:remember_me])
-      flash[:success] = "Welcome back!"
+      flash[:success] = t("user.session.welcome_flash")
       redirect_back_or_to root_path
     else
-      flash.now[:danger] = "Email and/or password is invalid."
+      flash.now[:danger] = t("user.session.error_flash")
       render "new"
     end
   end
 
   def destroy
     logout
-    flash[:success] = "See you!"
+    flash[:success] = t("user.session.logout_flash")
     redirect_to log_in_path
   end
 end

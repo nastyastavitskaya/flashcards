@@ -6,7 +6,7 @@ describe "Cards Mailer" do
     let(:mail) { CardsMailer.pending_cards_notification(user) }
 
     it 'renders the subject' do
-      expect(mail.subject).to eq("Карточки для проверки!")
+      expect(mail.subject).to eq("You have new cards to review!")
     end
 
     it "renders the receiver email" do

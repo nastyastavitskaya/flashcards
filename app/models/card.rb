@@ -67,7 +67,7 @@ class Card < ActiveRecord::Base
 
   def same_texts
     if sanitize_word(original_text) == sanitize_word(translated_text)
-      errors.add(:translated_text, "Original and translated text can't be same!")
+      errors.add(:translated_text, I18n.t('card.error'))
     end
   end
 

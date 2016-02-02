@@ -1,13 +1,14 @@
 <%= simple_form_for card do |f| %>
-  <%= f.input :original_text, placeholder: 'Enter original text' %>
-  <%= f.input :translated_text, placeholder: 'Enter translated text' %>
+  <%= f.input :original_text, label: t('card.original_text'), placeholder: t('card.form.original_text_placeholder') %>
+  <%= f.input :translated_text, label: t('card.translated_text'),
+      placeholder: t('card.form.translated_text_placeholder') %>
 
-  <%= f.input :image, input_html: { multipart: true } %>
-  <%= f.association :category, collection: current_user.categories.order(:name), prompt: "Choose existing category" %>
+  <%= f.input :image, label: t('card.image'), input_html: { multipart: true } %>
+  <%= f.association :category, label: t('card.form.category'), collection: current_user.categories.order(:name), prompt: t('card.form.prompt') %>
   <%= f.simple_fields_for :category do |category| %>
-    <%= category.input :name, label: "Or create new category", required: false %>
+    <%= category.input :name, label: t('card.form.create_category'), required: false %>
     <% end %>
 
-  <p><%= f.submit 'Save', class: "btn btn-success" %></p>
+  <p><%= f.submit t('card.form.submit'), class: "btn btn-success" %></p>
 <% end %>
 

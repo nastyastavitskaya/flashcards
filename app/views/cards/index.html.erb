@@ -1,7 +1,7 @@
-<div align="center">
-  <table style="width:100%">
+<div align='center'>
+  <table style='width:100%'>
     <thead>
-      <h1><%= @category.name %></h1>
+      <legend><%= @category.name %></legend>
     </thead>
     <tbody>
     <tr><th>
@@ -10,21 +10,22 @@
         <th><td><%= image_tag(card.image_url) %></td></th>
       </tr>
       <tr>
-        <th>Original Text:</th><td><%= card.original_text %></td>
+        <th><%= t('card.original_text') %></th><td><%= card.original_text %></td>
       </tr>
       <tr>
-        <th>Translated Text:</th><td><%= card.translated_text %></td>
+        <th><%= t('card.translated_text') %></th><td><%= card.translated_text %></td>
       </tr>
       <tr>
-        <th>Review Date:</th>
-          <td><%= card.review_date.strftime('%b %-d, %Y %H:%M') %></td>
-          <td><%= link_to 'Show', category_card_path(@category, card) %></td>
-          <td><%= link_to 'Edit', edit_category_card_path(@category, card) %></td>
-          <td><%= link_to 'Destroy', category_card_path(@category, card), method: :delete, data: { confirm: 'Are you sure?'} %></td>
+        <th><%= t('card.review_date') %></th>
+          <td><%= card.review_date.strftime('%m/%d/%Y, %H:%M') %></td>
+          <td><%= link_to t('card.index.link_show'), category_card_path(@category, card) %></td>
+          <td><%= link_to t('card.index.link_edit'), edit_category_card_path(@category, card) %></td>
+          <td><%= link_to t('card.index.link_destroy'), category_card_path(@category, card),
+          method: :delete, data: { confirm: t('card.index.confirm')} %></td>
       </tr>
     <% end %>
 
     </tbody>
   </table>
 </div>
-<h6><%= link_to 'Back', categories_path %></h6>
+<h6><%= link_to t('footer'), categories_path %></h6>

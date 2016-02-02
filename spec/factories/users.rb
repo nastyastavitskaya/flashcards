@@ -13,5 +13,6 @@ FactoryGirl.define do
     password "applebeforeapple"
     password_confirmation "applebeforeapple"
     current_category_id 1
+    locale "en"
   end
 end

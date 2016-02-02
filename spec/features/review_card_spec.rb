@@ -4,9 +4,9 @@ describe "Cards to review" do
   before(:each) do
     @user = create(:user)
     visit log_in_path
-    fill_in "Email", with: "steve@apple.com"
-    fill_in "Password", with: "applebeforeapple"
-    click_button "Log in"
+    fill_in :email, with: "steve@apple.com"
+    fill_in :password, with: "applebeforeapple"
+    click_button "Log In"
     visit root_path
   end
 
@@ -16,12 +16,12 @@ describe "Cards to review" do
       @card = create(:card)
       Timecop.freeze(@card.review_date)
       visit root_path
-      click_link "Перейти к тренировщику"
+      click_link "Trainig"
       visit reviews_path
     end
 
     it "no new cards to review" do
-      expect(page).to have_content "Новых карточек для проверки нет"
+      expect(page).to have_content "No new card to review!"
     end
   end
 
@@ -33,26 +33,26 @@ describe "Cards to review" do
       @card = create(:card, category_id: @category.id)
       Timecop.freeze(@card.review_date)
       visit root_path
-      click_link "Перейти к тренировщику"
+      click_link "Trainig"
       visit reviews_path
     end
 
     it "input wrong translation" do
-      fill_in "Введите перевод:", with: "cat"
-      click_button "Проверить"
-      expect(page).to have_content "Нет!"
+      fill_in "Your translation:", with: "cat"
+      click_button "Check"
+      expect(page).to have_content "No"
     end
 
     it "input typo" do
-      fill_in "Введите перевод:", with: "dogg"
-      click_button "Проверить"
-      expect(page).to have_content "Будь внимательнее!"
+      fill_in "Your translation:", with: "dogg"
+      click_button "Check"
+      expect(page).to have_content "Watch out!"
     end
 
     it "input right translation" do
-      fill_in "Введите перевод:", with: "dog"
-      click_button "Проверить"
-      expect(page).to have_content "Да!"
+      fill_in "Your translation:", with: "dog"
+      click_button "Check"
+      expect(page).to have_content "Yes!"
     end
   end
 
@@ -62,7 +62,7 @@ describe "Cards to review" do
       @category = create(:category, user_id: @user.id)
       card = create(:card, category_id: @category.id)
       visit root_path
-      click_link "Перейти к тренировщику"
+      click_link "Trainig"
       visit reviews_path
     end
 
@@ -74,12 +74,12 @@ describe "Cards to review" do
       @user = User.create(name: "lollipop", email: "lol@mail.com",
         password: "1234", password_confirmation: "1234")
       visit log_in_path
-      fill_in "Email", with: "lol@mail.com"
-      fill_in "Password", with: "1234"
-      click_button "Log in"
+      fill_in :email, with: "lol@mail.com"
+      fill_in :password, with: "1234"
+      click_button "Log In"
       visit root_path
-      click_link "Перейти к тренировщику"
-      expect(page).to have_content("Новых карточек для проверки нет")
+      click_link "Trainig"
+      expect(page).to have_content("No new card to review!")
     end
   end
 
