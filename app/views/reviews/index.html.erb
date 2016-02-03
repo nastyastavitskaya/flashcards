@@ -8,11 +8,13 @@
     <%= image_tag(@card.image_url) %>
   </p>
   <strong><%= @card.original_text %></strong>
-  <%= form_for :review, url: reviews_path, html: {class: 'form' } do |f| %>
+  <%= simple_form_for :review, url: reviews_path, html: {class: 'form' } do |f| %>
     <%= f.hidden_field :card_id, value: @card.id %>
-    <%= f.label :user_translated_text, t("card.review.user_translation") %>
-    <%= f.text_field :user_translated_text %>
-    <div><%= f.submit t("card.review.submit"), class: "btn btn-primary" %></div>
+    <%= f.input :user_translated_text, label: t("card.review.user_translation") %>
+
+    <%= f.hidden_field :quality_timer, id: "quality_timer" %>
+
+    <%= f.submit t("card.review.submit"), class: "btn btn-primary" %>
     <% end %>
   <% else %>
     <strong><%= t("card.review.no_cards") %></strong>

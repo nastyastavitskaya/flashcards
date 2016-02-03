@@ -3,6 +3,6 @@ FactoryGirl.define do
     category_id 1
     original_text "hund"
     translated_text "dog"
-    review_date Time.current
+    review_date DateTime.current
   end
 end

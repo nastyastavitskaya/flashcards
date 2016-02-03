@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128025252) do
+ActiveRecord::Schema.define(version: 20160211022834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,8 +34,10 @@ ActiveRecord::Schema.define(version: 20160128025252) do
     t.datetime "updated_at"
     t.string   "image"
     t.integer  "category_id"
-    t.integer  "num_of_incorrect_answers", default: 0
-    t.integer  "num_of_correct_answers",   default: 0
+    t.float    "efactor",         default: 2.5
+    t.integer  "interval",        default: 0
+    t.integer  "quality",         default: 0
+    t.integer  "repetition",      default: 0
   end
 
   create_table "categories", force: :cascade do |t|

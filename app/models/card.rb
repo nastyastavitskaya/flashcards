@@ -14,7 +14,7 @@ class Card < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  scope :to_review, -> { where("review_date <= ?", Time.current).order('RANDOM()') }
+  scope :to_review, -> { where("review_date <= ?", DateTime.current).order("RANDOM()") }
 
   def self.create_with_category(params)
     category_params = params.delete(:category)
@@ -26,43 +26,32 @@ class Card < ActiveRecord::Base
   end
 
 
-  def check_translation(user_translated_text)
-    @result = case Levenshtein.distance(user_translated_text, translated_text)
-              when 0
-                update_number_of_correct_answers
-                :correct
-              when 1, 2
-                :typo
-              else
-                update_number_of_incorrect_answers
-                :wrong
-              end
+  def check_translation(user_translated_text, quality_timer)
+    result = translation_distance(user_translated_text, translated_text)
+    quality_timer = 0 if result == :wrong
+    supermemo = SuperMemo2.new(interval, efactor, repetition, quality_timer)
+    update_attributes(supermemo.repetition_session)
+    update_attributes(supermemo.typo_repetition) if result == :typo
+    result
   end
 
-  def update_number_of_correct_answers
-    update_attributes(num_of_incorrect_answers: 0)
-    increment(:num_of_correct_answers) if num_of_correct_answers < 5
-    update_review_date
-  end
 
-  def update_number_of_incorrect_answers
-    decrement(:num_of_correct_answers) if num_of_correct_answers > 0
-    increment(:num_of_incorrect_answers) if num_of_incorrect_answers < 3
-    if num_of_incorrect_answers >= 3
-      update_attributes(num_of_correct_answers: 0, review_date: review_date + 12.hours)
+  def translation_distance(user_translated_text, translated_text)
+    distance = Levenshtein.distance(user_translated_text, translated_text)
+    if distance == 0
+      :correct
+    elsif distance == 1 || distance == 2
+      :typo
+    else
+      :wrong
     end
-  end
-
-  def update_review_date
-    review_number = INTERVAL[[5, num_of_correct_answers].min]
-    update_attributes(review_date: review_date + review_number)
   end
 
 
   private
 
   def set_default_review_date
-    self.review_date = Time.current
+    self.review_date = DateTime.current
   end
 
   def same_texts

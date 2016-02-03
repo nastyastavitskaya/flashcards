@@ -64,9 +64,8 @@ describe User do
         original_text: "katze",
         translated_text: "cat",
         category_id: category.id,
-        review_date: Date.today - 5.days
+        review_date: DateTime.current - 7.days
         )
-
       expect { User.notify_pending_cards }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
