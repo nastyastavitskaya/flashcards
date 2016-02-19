@@ -37,16 +37,14 @@ class SuperMemo2
   # 1 - incorrect response; the correct one remembered
   # 0 - complete blackout.
   def assess_quality(quality_timer)
-    if quality_timer = 0
-      return 0
-    end
     case quality_timer.to_i / 1000
     when 1..5 then 5
     when 6..11 then 4
     when 12..17 then 3
     when 18..23 then 2
+    when 24..31 then 1
     else
-      1
+      0
     end
   end
   # Split the knowledge into smallest possible items.

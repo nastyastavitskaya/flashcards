@@ -1,4 +1,4 @@
-ready = ->
+timer = ->
   start_time = new Date().getTime()
   $('form').on 'submit', ->
     end_time = new Date().getTime()
@@ -6,7 +6,5 @@ ready = ->
     $(this).append($(quality_timer))
 
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
-
-
+$(document).ready(timer)
+$(document).on('page:load', timer)
