@@ -10,7 +10,8 @@ class ReviewsController < ApplicationController
     result = @card.check_translation(review_params[:user_translated_text], review_params[:quality_timer])
     if result == :correct
       flash[:success] = t("card.controller.review_success",
-                          card: @card.translated_text, review_params: review_params[:user_translated_text],
+                          card: @card.translated_text,
+                          review_params: review_params[:user_translated_text],
                           review_date: @card.review_date.strftime("%m/%d/%Y"))
     elsif result == :typo
       flash[:warning] = t("card.controller.review_typo",

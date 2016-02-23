@@ -17,16 +17,10 @@ class SuperMemo2
     calculate_efactor if @repetition > 0
     {
       interval: interval,
-      efactor: @efactor,
+      efactor: @efactor.round(1),
       repetition: @repetition + 1,
       quality: @quality,
       review_date: DateTime.current + interval.days
-    }
-  end
-
-  def typo_repetition
-    {
-      quality: @quality - 1
     }
   end
   # After each repetition assess the quality of repetition:

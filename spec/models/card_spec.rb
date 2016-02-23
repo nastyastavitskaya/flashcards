@@ -34,9 +34,6 @@ describe Card do
   end
   # efactor: 2.5, interval: 1, quality: 5, repetition: 1
   context "#supermemo2_review_algorithm" do
-    before do
-      @card = create(:card, repetition: 0)
-    end
     it "1st correct answer" do
       expect(@card.check_translation("dog", 5000)).to be :correct
       expect(@card.repetition).to eq(1)
@@ -79,7 +76,7 @@ describe Card do
         to eq((@card.review_date + @card.interval).strftime("%m/%d/%Y, %H"))
     end
   end
-  # efactor: 2.8000000000000003, interval: 43, quality: 5, repetition: 4
+  # efactor: 2.8, interval: 43, quality: 5, repetition: 4
   context "#supermemo2_review_algorithm" do
     before do
       @card = create(:card, repetition: 3, efactor: 2.7, interval: 16)
@@ -88,9 +85,21 @@ describe Card do
     it "4th correct answer" do
       expect(@card.check_translation("dog", 3500)).to be :correct
       expect(@card.repetition).to eq(4)
-      expect(@card.efactor).to eq(2.8000000000000003)
+      expect(@card.efactor).to eq(2.8)
       expect(@card.interval).to eq(43)
       expect(@card.quality).to eq(5)
+      expect(@card.review_date.strftime("%m/%d/%Y, %H")).
+        to eq((@card.review_date + @card.interval).strftime("%m/%d/%Y, %H"))
+    end
+  end
+  # efactor: 2.5, interval: 1, quality: 4, repetition: 1
+  context "#supermemo2_review_algorithm" do
+    it "typo answer" do
+      expect(@card.check_translation("dig", 5000)).to be :typo
+      expect(@card.repetition).to eq(1)
+      expect(@card.efactor).to eq(2.5)
+      expect(@card.interval).to eq(1)
+      expect(@card.quality).to eq(4)
       expect(@card.review_date.strftime("%m/%d/%Y, %H")).
         to eq((@card.review_date + @card.interval).strftime("%m/%d/%Y, %H"))
     end

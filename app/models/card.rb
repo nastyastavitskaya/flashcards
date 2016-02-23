@@ -1,10 +1,6 @@
 class Card < ActiveRecord::Base
-
-  INTERVAL = [0, 12.hours, 3.days, 7.days, 14.days, 1.month]
-
   validates :original_text,
             :translated_text, presence: true
-
 
   validate :same_texts
 
@@ -25,16 +21,20 @@ class Card < ActiveRecord::Base
     create(params)
   end
 
-
   def check_translation(user_translated_text, quality_timer)
     result = translation_distance(user_translated_text, translated_text)
     quality_timer = 0 if result == :wrong
     supermemo = SuperMemo2.new(interval, efactor, repetition, quality_timer)
     update_attributes(supermemo.repetition_session)
-    update_attributes(supermemo.typo_repetition) if result == :typo
+    if result == :typo
+      decrement_quality_when_typo
+    end
     result
   end
 
+  def decrement_quality_when_typo
+    decrement(:quality)
+  end
 
   def translation_distance(user_translated_text, translated_text)
     distance = Levenshtein.distance(user_translated_text, translated_text)
@@ -46,7 +46,6 @@ class Card < ActiveRecord::Base
       :wrong
     end
   end
-
 
   private
 
