@@ -1,9 +1,12 @@
 class SuperMemo2
-  def initialize(interval, efactor, repetition, quality_timer)
+  attr_accessor :result
+
+  def initialize(efactor, repetition, interval, quality_timer, user_translated_text, translated_text)
+    @result = translation_distance(user_translated_text, translated_text)
     @quality = assess_quality quality_timer
-    @interval = interval
-    @efactor = efactor
     @repetition = repetition
+    @efactor = efactor
+    @interval = interval
     reset_repetition if @quality < 3
   end
   # If the quality response was lower than 3
@@ -16,12 +19,23 @@ class SuperMemo2
     interval = set_interval
     calculate_efactor if @repetition > 0
     {
-      interval: interval,
-      efactor: @efactor.round(1),
-      repetition: @repetition + 1,
       quality: @quality,
+      repetition: @repetition + 1,
+      efactor: @efactor.round(1),
+      interval: interval,
       review_date: DateTime.current + interval.days
     }
+  end
+
+  def translation_distance(user_translated_text, translated_text)
+    distance = Levenshtein.distance(user_translated_text, translated_text)
+    if distance == 0
+      :correct
+    elsif distance == 1 || distance == 2
+      :typo
+    else
+      :wrong
+    end
   end
   # After each repetition assess the quality of repetition:
   # 5 - perfect response
@@ -31,7 +45,13 @@ class SuperMemo2
   # 1 - incorrect response; the correct one remembered
   # 0 - complete blackout.
   def assess_quality(quality_timer)
-    case quality_timer.to_i / 1000
+    quality_timer = quality_timer.to_i
+    if @result == :wrong
+      return 0
+    elsif @result == :typo
+      quality_timer += 6000
+    end
+    case quality_timer / 1000
     when 1..5 then 5
     when 6..11 then 4
     when 12..17 then 3

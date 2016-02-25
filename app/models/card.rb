@@ -21,25 +21,10 @@ class Card < ActiveRecord::Base
     create(params)
   end
 
-  def check_translation(user_translated_text, quality_timer)
-    quality_timer = quality_timer.to_i
-    result = translation_distance(user_translated_text, translated_text)
-    quality_timer = 0 if result == :wrong
-    quality_timer += 6000 if result == :typo
-    supermemo = SuperMemo2.new(interval, efactor, repetition, quality_timer)
+  def check_translation(result, quality_timer)
+    supermemo = SuperMemo2.new(efactor, repetition, interval, quality_timer, translated_text, result)
     update_attributes(supermemo.repetition_session)
-    result
-  end
-
-  def translation_distance(user_translated_text, translated_text)
-    distance = Levenshtein.distance(user_translated_text, translated_text)
-    if distance == 0
-      :correct
-    elsif distance == 1 || distance == 2
-      :typo
-    else
-      :wrong
-    end
+    supermemo.result
   end
 
   private
