@@ -21,14 +21,14 @@ class User < ActiveRecord::Base
 
   def pending_cards
     if current_category
-      current_category.cards.to_review.order('RANDOM()')
+      current_category.cards.to_review.order("RANDOM()")
     else
       cards.to_review
     end
   end
 
   def self.notify_pending_cards
-    users = User.includes(:cards).where("cards.review_date <= ?", Time.now).references(:cards)
+    users = User.includes(:cards).where("cards.review_date <= ?", DateTime.current).references(:cards)
     users.each do |user|
       CardsMailer.pending_cards_notification(user).deliver_later
     end
