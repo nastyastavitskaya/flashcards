@@ -54,10 +54,8 @@ gem 'http_accept_language'
 
 # Easy and powerful exception tracking for Ruby
 gem 'rollbar', '~> 2.7.1'
-
+# deep information about the performance of your web application as it runs in production
 gem 'newrelic_rpm'
-
-
 
 group :development, :test do
   gem 'rspec-rails'

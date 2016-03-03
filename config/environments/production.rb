@@ -64,14 +64,14 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'https://quiet-dawn-8562.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: "https://quiet-dawn-8562.herokuapp.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['SPARKPOST_SMTP_HOST'],
+    address:              ENV["SPARKPOST_SMTP_HOST"],
     enable_starttls_auto: true,
-    port:                 ENV['SPARKPOST_SMTP_PORT'],
-    user_name:            ENV['SPARKPOST_SMTP_USERNAME'],
-    password:             ENV['SPARKPOST_SMTP_PASSWORD'],
+    port:                 ENV["SPARKPOST_SMTP_PORT"],
+    user_name:            ENV["SPARKPOST_SMTP_USERNAME"],
+    password:             ENV["SPARKPOST_SMTP_PASSWORD"],
     authentication:       :plain
   }
 
