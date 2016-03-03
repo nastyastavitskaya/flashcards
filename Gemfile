@@ -9,6 +9,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 
+# # Access an IRB console on exception pages or by using <%= console %> in views
+gem 'web-console', group: :development
+
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'font-awesome-sass'
 gem 'simple_form'
@@ -40,9 +43,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Heroku deploy
-gem 'rails_12factor', group: :production
-
 # Levenshtein distance
 gem 'levenshtein-ffi', require: 'levenshtein'
 
@@ -52,12 +52,13 @@ gem 'whenever', require: false
 # Find out which locale the user preferes by reading the languages they specified in their browser
 gem 'http_accept_language'
 
+# Easy and powerful exception tracking for Ruby
+gem 'rollbar', '~> 2.7.1'
+# deep information about the performance of your web application as it runs in production
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -69,4 +70,9 @@ group :test do
   gem 'timecop'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+end
+
+group :production do
+  # Heroku deploy
+  gem 'rails_12factor'
 end

@@ -16,7 +16,16 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              ENV["SPARKPOST_SMTP_HOST"],
+    enable_starttls_auto: true,
+    port:                 ENV["SPARKPOST_SMTP_PORT"],
+    user_name:            ENV["SPARKPOST_SMTP_USERNAME"],
+    password:             ENV["SPARKPOST_SMTP_PASSWORD"],
+    authentication:       :plain
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
