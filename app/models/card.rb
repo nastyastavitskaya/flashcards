@@ -10,7 +10,7 @@ class Card < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  scope :to_review, -> { where("review_date <= ?", DateTime.current).order("RANDOM()") }
+  scope :to_review, -> { where("review_date >= ?", DateTime.current).order("RANDOM()") }
 
   def self.create_with_category(params)
     category_params = params.delete(:category)
