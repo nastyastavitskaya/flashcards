@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
   before_action :require_login
-  # after_filter :flash_to_headers
 
   def set_locale
     locale = change_locale
@@ -12,14 +11,6 @@ class ApplicationController < ActionController::Base
       session[:locale] = I18n.locale = locale.to_sym
     end
   end
-
-  # def flash_to_headers
-  #   return unless request.xhr?
-  #   response.headers['X-Message'] = flash_message
-  #   response.headers["X-Message-Type"] = flash_type.to_s
-
-  #   flash.discard # don't want the flash to appear when you reload page
-  # end
 
   private
 
@@ -34,20 +25,6 @@ class ApplicationController < ActionController::Base
       http_accept_language.compatible_language_from(I18n.available_locales)
     end
   end
-
-  # def flash_message
-  #   [:success, :error, :warning, :notice, nil].each do |type|
-  #     return "" if type.nil?
-  #     return flash[type] unless flash[type].blank?
-  #   end
-  # end
-
-  # def flash_type
-  #   [:success, :error, :warning, :notice, nil].each do |type|
-  #     return "" if type.nil?
-  #     return type unless flash[type].blank?
-  #   end
-  # end
 
 
   def not_authenticated
