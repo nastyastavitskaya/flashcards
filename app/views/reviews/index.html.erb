@@ -1,23 +1,20 @@
 <div align="center">
-<legend><%= t("card.review.title") %></legend>
-  <% if @card %>
-  <h4>
-    <%= t("card.review.selected_category") %> <%= @card.category.name %>
-  </h4>
-  <p>
-    <%= image_tag(@card.image_url) %>
-  </p>
-  <strong><%= @card.original_text %></strong>
-  <%= simple_form_for :review, url: reviews_path, html: {class: 'form' } do |f| %>
-    <%= f.hidden_field :card_id, value: @card.id %>
-    <%= f.input :user_translated_text, label: t("card.review.user_translation") %>
-
-    <%= f.hidden_field :quality_timer, id: "quality_timer" %>
-
-    <%= f.submit t("card.review.submit"), class: "btn btn-primary" %>
-    <% end %>
+  <legend>
+    <%= t("card.review.title") %>
+  </legend>
+  <% if @card.nil? %>
+    <strong class="text-danger lead"><%= t("card.review.no_cards") %></strong>
   <% else %>
-    <strong><%= t("card.review.no_cards") %></strong>
-<% end %>
-</div>
+    <h4><%= t("card.review.selected_category") %> <%= @card.category.name %></h4>
+    <p class="image"><%= image_tag(@card.image_url) %></p>
+    <strong class="original_text"><%= @card.original_text %></strong>
 
+    <%= simple_form_for :review, url: reviews_path, method: :post,  html: {id: "review-form" } do |f| %>
+      <%= f.hidden_field :card_id, value: @card.id, class: 'card_id' %>
+     <%= f.input :user_translated_text, label: t("card.review.user_translation"), class: "user_translation" %>
+      <%= f.hidden_field :quality_timer, id: "quality_timer" %>
+      <%= f.button :submit, t("card.review.submit"), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <% end %>
+</div>

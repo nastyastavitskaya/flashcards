@@ -5,14 +5,12 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :require_login
 
-
   def set_locale
     locale = change_locale
     if locale && I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale.to_sym
     end
   end
-
 
   private
 
