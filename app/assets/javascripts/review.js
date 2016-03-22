@@ -2,8 +2,6 @@ $(document).ready(function(){
   var form = $("#review-form");
   timer.start();
 
-
-
   $(form).submit(function(event){
     timer.stop();
     $("#quality_timer").val(timer.resultTime());
